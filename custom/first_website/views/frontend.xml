@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="assets" name="first_website assets">
+    <link rel="stylesheet" href="/first_website/static/src/css/style.css" />
+
+    <script type="text/javascript" src="/first_website/static/src/js/chrome.js"/>
+    <script type="text/javascript" src="/first_website/static/src/js/main.js"/>
+    <script type="text/javascript" src="/first_website/static/src/js/db.js"/>
+    <script type="text/javascript" src="/first_website/static/src/js/models.js"/>
+    <script type="text/javascript" src="/first_website/static/src/js/screens.js"/>
+</template>
+<template id="index" name="first_website index">&lt;!DOCTYPE html&gt;
+<html>
+    <head>
+        <title>Hello World 123</title>
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <meta http-equiv="content-type" content="text/html, charset=utf-8" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="mobile-web-app-capable" content="yes"/>
+
+        <link rel="shortcut icon" href="/first_website/static/description/icon.png" type="image/x-icon"/>
+
+        <script type="text/javascript">
+            var odoo = {
+                csrf_token: "<t t-esc="request.csrf_token(None)"/>",
+                session_info: <t t-raw="session_info"/>,
+            };
+        </script>
+
+        <t t-call-assets="web.assets_common" t-css="false"/>
+        <t t-call-assets="web.assets_backend" t-css="false"/>
+        <t t-call-assets="web_editor.summernote" t-css="false"/>
+        <t t-call-assets="web_editor.assets_editor" t-css="false"/>
+        <t t-call-assets="vx_web_ui.assets"/>
+        <t t-call-assets="first_website.assets"/>
+
+        <script type="text/javascript" id="loading-script" t-raw="init">
+            odoo.define('web.web_client', function (require) {
+                var WebClient = require('web.AbstractWebClient');
+                var web_client = new WebClient();
+
+                web_client._title_changed = function() {};
+                web_client.show_application = function() {
+                    return web_client.action_manager.do_action("first_website.ui");
+                };
+
+                $(function () {
+                    web_client.setElement($(document.body));
+                    web_client.start();
+                });
+                return web_client;
+            });
+        </script>
+    </head>
+    <body>
+        <div class="o_main_content first_website"/>
+        <div>
+            <label>Hello </label>
+        </div>
+    </body>
+</html>
+</template>
+</odoo>

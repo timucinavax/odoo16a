@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <!--Screens-->
+    <t t-name="main_screen_first_website_tmpl">
+        <div class="screen first_website main-screen">
+            <label>Hello world</label>
+        </div>
+    </t>
+</templates>

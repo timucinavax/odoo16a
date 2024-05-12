@@ -1,0 +1,139 @@
+.epos_ecom_picking .module-logo{
+    /*noinspection CssUnknownTarget*/
+    background: url(/vx_stocktake/static/description/icon-small.png) no-repeat;
+}
+.epos_ecom_picking #items_list{
+    margin-top: 10px;
+    overflow-x: hidden;
+    padding-right: 5px;
+}
+.vx-header{
+    background: #aff;
+}
+.epos_ecom_picking .input-box{
+    display: none;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.epos_ecom_picking .half-box{
+    width: 50%;
+    float: left;
+}
+.epos_ecom_picking .half-box:nth-child(2n){
+    padding-left: 5px;
+}
+.epos_ecom_picking .half-box:nth-child(2n+1){
+    padding-right: 5px;
+}
+.epos_ecom_picking #pack_size, .vx-stocktake #qty_available{
+    display: inline-block;
+    margin-right: 10px;
+}
+.epos_ecom_picking .bottom15{
+    padding-bottom: 15px;
+}
+
+.epos_ecom_picking #request_count.badge{
+    margin-left: 5px;
+    background: #337ab7;
+}
+
+.epos_ecom_picking .list-group-item .fa-trash {
+    float: right;
+}
+
+.epos_ecom_picking .float-right {
+    float:right;
+}
+
+.epos_ecom_picking .js_new_request{
+    margin-bottom:10px;
+}
+
+.epos_ecom_picking .js_lock_list {
+    float:left;
+}
+
+.epos_ecom_picking .js_request_change {
+    padding-left:10px;
+}
+
+.epos_ecom_picking .input-radio {
+    vertical-align: top;margin-left:20px;
+}
+
+.epos_ecom_picking .more_info_click_js {
+    display:inline-block;
+    width:75%;
+}
+
+.epos_ecom_picking .line-count {
+    display:inline-block;
+    float:right;
+}
+
+.epos_ecom_picking .row.note {
+    margin-top:5px;
+}
+
+.epos_ecom_picking .div-trash{
+    padding:0px;
+}
+
+.o_grn_rol_cell{
+    height: 65px;
+    text-align: right;
+}
+.grn_rol{
+    /*border-collapse: collapse;*/
+    border: 1px solid gray;
+}
+.grn_rol td{
+    /*border: 1px solid #ccc;*/
+    padding: 0 5px;
+    text-align: right;
+}
+.grn_rol .grn{
+    color: red
+}
+.grn_rol .sale{
+    color: blue
+}
+.grn_rol .remain{
+    color: white;
+    background: green;
+    vertical-align: middle;
+}
+
+.epos_ecom_picking #qty_available_btn, .vx-stocktake #stock_product_info_btn{
+    margin-right: 10px;
+}
+.epos_ecom_picking #qty_available_btn, .vx-stocktake #product_search_btn{
+    margin-left: 10px;
+}
+
+.vx-web-ui #order_name{
+    cursor: pointer;
+    font-size:50%;
+}
+
+.epos_ecom_picking fieldset {
+    border: 1px solid lightgray;
+    padding: 10px;
+}
+
+.epos_ecom_picking legend {
+    border: 0;
+    width: initial;
+    padding: 0 10px;
+    margin: 0;
+    display: inline-block;
+}
+
+.epos_ecom_picking .warning-box {
+    font-size: 16px;
+    max-height: 200px;
+    overflow: auto;
+    border: 1px solid lightgray;
+    padding: 5px;
+}
