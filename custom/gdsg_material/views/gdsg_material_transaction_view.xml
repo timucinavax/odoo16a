@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_gdsg_material_transaction_tree" model="ir.ui.view">
+            <field name="name">gdsg.material.transaction.tree</field>
+            <field name="model">gdsg.material.transaction</field>
+            <field name="arch" type="xml">
+                <tree string="Quản lý nhập xuất">
+                    <field name="material_id"/>
+                    <field name="date"/>
+                    <field name="partner_id"/>
+                    <field name="description"/>
+                    <field name="type"/>
+                    <field name="quantity"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_gdsg_material_transaction_form" model="ir.ui.view">
+            <field name="name">gdsg.material.transaction.form</field>
+            <field name="model">gdsg.material.transaction</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Quản lý nhập xuất">
+                    <header/>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="material_id"/>
+                                <field name="date"/>
+                                <field name="partner_id"/>
+                            </group>
+                            <group>
+                                <field name="description"/>
+                                <field name="type"/>
+                                <field name="quantity"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="gdsg_material_transaction_action">
+            <field name="name">Material Transaction</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">gdsg.material.transaction</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="gdsg_material_transaction_action_form">
+            <field name="act_window_id" ref="gdsg_material_transaction_action"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_gdsg_material_transaction_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="gdsg_material_transaction_action_tree">
+            <field name="act_window_id" ref="gdsg_material_transaction_action"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_gdsg_material_transaction_tree"/>
+        </record>
+
+    </data>
+</odoo>

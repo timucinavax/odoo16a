@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+gdsg_material.access_gdsg_material_management,access_gdsg_material_management,gdsg_material.model_gdsg_material_management,base.group_user,1,1,1,1
+gdsg_material.access_gdsg_material_management_line,access_gdsg_material_management_line,gdsg_material.model_gdsg_material_management_line,base.group_user,1,1,1,1
+gdsg_material.access_gdsg_material_transaction,access_gdsg_material_transaction,gdsg_material.model_gdsg_material_transaction,base.group_user,1,1,1,1
