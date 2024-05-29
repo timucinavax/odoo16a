@@ -13,6 +13,7 @@ class Material_Management(models.Model):
     type = fields.Selection([('pdf', 'pdf'), ('ppt', 'ppt'), ('doc', 'doc')],
                             required=True, default='pdf')
     attachment = fields.Binary('File đính kèm', help="File to check and/or import, raw binary (not base64)")
+    attachment_name = fields.Char('File Name')
     material_line = fields.One2many('gdsg.material.management.line', 'ref')
 
 class Material_Management_Line(models.Model):
