@@ -10,6 +10,9 @@ class Material_Management(models.Model):
     pic = fields.Many2one('res.partner','Người phụ trách')
     description = fields.Char('Diễn giải')
     balance = fields.Integer('Số lượng tồn', default=0)
+    type = fields.Selection([('pdf', 'pdf'), ('ppt', 'ppt'), ('doc', 'doc')],
+                            required=True, default='pdf')
+    attachment = fields.Binary('File đính kèm', help="File to check and/or import, raw binary (not base64)")
     material_line = fields.One2many('gdsg.material.management.line', 'ref')
 
 class Material_Management_Line(models.Model):
