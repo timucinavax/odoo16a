@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_op_session_inherit" model="ir.ui.view">
+            <field name="name">op.session.form.inherit</field>
+            <field name="model">op.session</field>
+            <field name="inherit_id" ref="openeducat_timetable.view_op_session_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/group" position="after">
+                    <notebook>
+                        <page name="op_session_line" string="Session Line">
+                            <field name="op_session_line" colspan="4" nolabel="1">
+                                <tree editable="1">
+                                    <field name="material_id"/>
+                                    <field name="quantity"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

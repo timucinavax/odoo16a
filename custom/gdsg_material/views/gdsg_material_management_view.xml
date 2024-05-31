@@ -37,18 +37,18 @@
                                 <field name="balance" readonly="True"/>
                             </group>
                         </group>
-                            <notebook invisible="1">
-                                <page name="material_line" string="Material Line">
-                                    <field name="material_line" colspan="4" nolabel="1">
-                                        <tree editable="1">
-                                            <field name="name"/>
-                                            <field name="duration"/>
-                                            <field name="type"/>
-                                            <field name="attachment"/>
-                                        </tree>
-                                    </field>
-                                </page>
-                            </notebook>
+                        <notebook invisible="1">
+                            <page name="material_line" string="Material Line">
+                                <field name="material_line" colspan="4" nolabel="1">
+                                    <tree editable="1">
+                                        <field name="name"/>
+                                        <field name="duration"/>
+                                        <field name="type"/>
+                                        <field name="attachment"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
