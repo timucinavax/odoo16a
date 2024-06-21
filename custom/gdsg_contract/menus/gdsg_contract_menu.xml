@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_gdsg_contract_root"
+                  name="Quản lý hợp đồng"
+                  sequence="10"/>
+
+        <menuitem id="menu_gdsg_contract_parent"
+                  name="Hoạt động"
+                  sequence="10"
+                  parent="menu_gdsg_contract_root"/>
+
+        <menuitem id="menu_gdsg_contract_core"
+                  name="Hợp đồng"
+                  sequence="10"
+                  parent="menu_gdsg_contract_parent"
+                  action="gdsg_contract_core_action"/>
+
+    </data>
+</odoo>
