@@ -1,1 +1,2 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+gdsg_contract.access_gdsg_contract_core,access_gdsg_contract_core,gdsg_contract.model_gdsg_contract_core,base.group_user,1,1,1,1

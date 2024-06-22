@@ -20,27 +20,24 @@
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
                 <form string="Quản lý hợp đồng">
-                    <header/>
-                    <sheet>
+                    <group>
                         <group>
-                            <group>
-                                <field name="name"/>
-                                <field name="partner_id"/>
-                                <field name="represent"/>
-                                <field name="partner_bank_id"/>
-                            </group>
-                            <group>
-                                <field name="tuition_fee"/>
-                                <field name="from_date"/>
-                                <field name="to_date"/>
-                            </group>
+                            <field name="name"/>
+                            <field name="partner_id"/>
+                            <field name="represent"/>
+                            <field name="partner_bank_id"/>
                         </group>
-                        <notebook invisible="1">
-                            <page name="description" string="Ghi chú">
-                                <field name="description"/>
-                            </page>
-                        </notebook>
-                    </sheet>
+                        <group>
+                            <field name="tuition_fee"/>
+                            <field name="from_date"/>
+                            <field name="to_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="description" string="Ghi chú">
+                            <field name="description"/>
+                        </page>
+                    </notebook>
                 </form>
             </field>
         </record>

@@ -2,16 +2,16 @@
 <odoo>
     <data>
         <menuitem id="menu_gdsg_contract_root"
-                  name="Quản lý hợp đồng"
+                  name="ContractManager"
                   sequence="10"/>
 
         <menuitem id="menu_gdsg_contract_parent"
-                  name="Hoạt động"
+                  name="Activity"
                   sequence="10"
                   parent="menu_gdsg_contract_root"/>
 
         <menuitem id="menu_gdsg_contract_core"
-                  name="Hợp đồng"
+                  name="Contract"
                   sequence="10"
                   parent="menu_gdsg_contract_parent"
                   action="gdsg_contract_core_action"/>
