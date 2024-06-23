@@ -5,16 +5,33 @@
                   name="ContractManager"
                   sequence="10"/>
 
-        <menuitem id="menu_gdsg_contract_parent"
-                  name="Activity"
-                  sequence="10"
+            <menuitem id="menu_gdsg_contract_activity_parent"
+                      name="Activity"
+                      sequence="10"
+                      parent="menu_gdsg_contract_root"/>
+
+                <menuitem id="menu_gdsg_contract_core"
+                          name="Contract"
+                          sequence="10"
+                          parent="menu_gdsg_contract_activity_parent"
+                          action="gdsg_contract_core_action"/>
+            <menuitem id="menu_gdsg_contract_revenue_parent"
+                  name="Revenue"
+                  sequence="20"
                   parent="menu_gdsg_contract_root"/>
-
-        <menuitem id="menu_gdsg_contract_core"
-                  name="Contract"
-                  sequence="10"
-                  parent="menu_gdsg_contract_parent"
-                  action="gdsg_contract_core_action"/>
-
+                <menuitem id="menu_gdsg_contract_transaction_revenue"
+                          name="Contract Revenue"
+                          sequence="10"
+                          parent="menu_gdsg_contract_revenue_parent"
+                          action="gdsg_contract_transaction_revenue_action"/>
+            <menuitem id="menu_gdsg_contract_expense_parent"
+                  name="Expense"
+                  sequence="30"
+                  parent="menu_gdsg_contract_root"/>
+                <menuitem id="menu_gdsg_contract_transaction_expense"
+                          name="Contract Expense"
+                          sequence="10"
+                          parent="menu_gdsg_contract_expense_parent"
+                          action="gdsg_contract_transaction_expense_action"/>
     </data>
 </odoo>

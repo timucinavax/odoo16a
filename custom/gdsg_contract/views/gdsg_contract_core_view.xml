@@ -5,10 +5,12 @@
             <field name="name">gdsg_contract.core.tree</field>
             <field name="model">gdsg_contract.core</field>
             <field name="arch" type="xml">
-                <tree string="Quản lý hợp đồng">
+                <tree string="Contract manager">
                     <field name="name"/>
                     <field name="from_date"/>
                     <field name="to_date"/>
+                    <field name="sum_revenue"/>
+                    <field name="sum_expense"/>
                     <field name="state"/>
                 </tree>
             </field>
@@ -19,25 +21,42 @@
             <field name="model">gdsg_contract.core</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
-                <form string="Quản lý hợp đồng">
-                    <group>
+                <form string="Contract manager">
+                    <header>
+                        <button name="action_inprocess" string="Inprocess" type="object" class="oe_highlight"
+                                attrs="{'invisible': [('state', 'not in', ['new'])]}"/>
+                        <button name="action_close" string="Close" type="object" class="oe_highlight"
+                                attrs="{'invisible': [('state', 'not in', ['process'])]}"/>
+                        <button name="action_backtonew" string="Back to New" type="object" class="oe_highlight"
+                                attrs="{'invisible': [('state', 'not in', ['cancel'])]}"/>
+                        <button name="action_cancel" string="Cancel" type="object" class="oe_highlight"
+                                attrs="{'invisible': [('state', 'not in', ['new','process'])]}"/>
+                        <field name="state" widget="statusbar" class="o_field_statusbar"
+                               statusbar_visible="new,process,closed"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+
+                        </div>
                         <group>
-                            <field name="name"/>
-                            <field name="partner_id"/>
-                            <field name="represent"/>
-                            <field name="partner_bank_id"/>
+                            <group>
+                                <field name="name"/>
+                                <field name="partner_id"/>
+                                <field name="represent"/>
+                                <field name="partner_bank_id"/>
+                            </group>
+                            <group>
+                                <field name="tuition_fee"/>
+                                <field name="from_date"/>
+                                <field name="to_date"/>
+                            </group>
                         </group>
-                        <group>
-                            <field name="tuition_fee"/>
-                            <field name="from_date"/>
-                            <field name="to_date"/>
-                        </group>
-                    </group>
-                    <notebook>
-                        <page name="description" string="Ghi chú">
-                            <field name="description"/>
-                        </page>
-                    </notebook>
+                        <notebook>
+                            <page name="description" string="Description">
+                                <field name="description"/>
+                            </page>
+                        </notebook>
+                    </sheet>
                 </form>
             </field>
         </record>
@@ -52,7 +71,7 @@
             <field name="context">{}</field>
         </record>
 
-        <record model="ir.actions.act_window.view" id="gdsg_material_management_action_tree">
+        <record model="ir.actions.act_window.view" id="gdsg_contract_core_action_tree">
             <field name="act_window_id" ref="gdsg_contract_core_action"/>
             <field name="sequence" eval="10"/>
             <field name="view_mode">tree</field>
