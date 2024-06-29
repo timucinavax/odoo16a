@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_gdsg_refund_rule_tree" model="ir.ui.view">
+            <field name="name">gdsg_refund.rule.tree</field>
+            <field name="model">gdsg_refund.rule</field>
+            <field name="arch" type="xml">
+                <tree string="Rule">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="sequence"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_gdsg_refund_rule_form" model="ir.ui.view">
+            <field name="name">gdsg_refund.rule.form</field>
+            <field name="model">gdsg_refund.rule</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Rule">
+                    <header/>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="category_id"/>
+                            </group>
+                            <group>
+                                <field name="active"/>
+                                <field name="sequence"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="python_code"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="gdsg_refund_rule_action">
+            <field name="name">Gdsg Rule</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">gdsg_refund.rule</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="gdsg_refund_rule_action_form">
+            <field name="act_window_id" ref="gdsg_refund_rule_action"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_gdsg_refund_rule_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="gdsg_refund_rule_action_tree">
+            <field name="act_window_id" ref="gdsg_refund_rule_action"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_gdsg_refund_rule_tree"/>
+        </record>
+
+    </data>
+</odoo>

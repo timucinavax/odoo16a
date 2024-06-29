@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_gdsg_refund_root"
+                  name="Refund"
+                  sequence="10"/>
+
+
+        <menuitem id="menu_gdsg_refund_rule_category"
+                  name="Rule Category"
+                  sequence="10"
+                  parent="menu_gdsg_refund_root"
+                  action="gdsg_refund_rule_category_action"/>
+
+        <menuitem id="menu_gdsg_refund_rule"
+                  name="Rule"
+                  sequence="20"
+                  parent="menu_gdsg_refund_root"
+                  action="gdsg_refund_rule_action"/>
+
+        <menuitem id="menu_gdsg_refund_structure"
+                  name="Structure"
+                  sequence="30"
+                  parent="menu_gdsg_refund_root"
+                  action="gdsg_refund_structure_action"/>
+
+    </data>
+</odoo>
