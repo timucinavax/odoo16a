@@ -18,9 +18,15 @@
                   parent="menu_gdsg_refund_root"
                   action="gdsg_refund_rule_action"/>
 
+        <menuitem id="menu_gdsg_refund_rate"
+                  name="Rate"
+                  sequence="30"
+                  parent="menu_gdsg_refund_root"
+                  action="gdsg_refund_rate_action"/>
+
         <menuitem id="menu_gdsg_refund_structure"
                   name="Structure"
-                  sequence="30"
+                  sequence="40"
                   parent="menu_gdsg_refund_root"
                   action="gdsg_refund_structure_action"/>
 
