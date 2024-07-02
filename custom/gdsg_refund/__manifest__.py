@@ -3,7 +3,7 @@
     'version': '1.0',
     'description': 'GDSG Refund',
     'author': 'son.truong',
-    'depends': [],
+    'depends': ['gdsg_contract'],
     'data': [
         'security/ir.model.access.csv',
         'views/gdsg_refund_rule_category_view.xml',

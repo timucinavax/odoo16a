@@ -25,6 +25,7 @@
                         <group>
                             <group>
                                 <field name="name"/>
+                                <field name="contract_id"/>
                                 <field name="contract_tuition"/>
                                 <field name="tuition_fee"/>
                                 <field name="material"/>

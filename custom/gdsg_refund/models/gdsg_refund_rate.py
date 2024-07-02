@@ -6,6 +6,7 @@ class Refund_Rate(models.Model):
     _description = 'Refund Rate'
 
     name = fields.Char('Customer', required=True)
+    contract_id = fields.Many2one('gdsg_contract.core', string='Contract')
     contract_tuition = fields.Char('Contract Tuition')
     tuition_fee = fields.Integer('Tuition')
     material = fields.Integer('Material')
