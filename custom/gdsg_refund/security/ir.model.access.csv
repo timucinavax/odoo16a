@@ -3,3 +3,5 @@ gdsg_refund.access_gdsg_refund_rule_category,access_gdsg_refund_rule_category,gd
 gdsg_refund.access_gdsg_refund_rule,access_gdsg_refund_rule,gdsg_refund.model_gdsg_refund_rule,base.group_user,1,1,1,1
 gdsg_refund.access_gdsg_refund_structure,access_gdsg_refund_structure,gdsg_refund.model_gdsg_refund_structure,base.group_user,1,1,1,1
 gdsg_refund.access_gdsg_refund_rate,access_gdsg_refund_rate,gdsg_refund.model_gdsg_refund_rate,base.group_user,1,1,1,1
+gdsg_refund.access_gdsg_refund_core,access_gdsg_refund_core,gdsg_refund.model_gdsg_refund_core,base.group_user,1,1,1,1
+gdsg_refund.access_gdsg_refund_core_lines,access_gdsg_refund_core_lines,gdsg_refund.model_gdsg_refund_core_lines,base.group_user,1,1,1,1

@@ -30,5 +30,11 @@
                   parent="menu_gdsg_refund_root"
                   action="gdsg_refund_structure_action"/>
 
+        <menuitem id="menu_gdsg_core_structure"
+                  name="Core"
+                  sequence="50"
+                  parent="menu_gdsg_refund_root"
+                  action="gdsg_refund_core_action"/>
+
     </data>
 </odoo>

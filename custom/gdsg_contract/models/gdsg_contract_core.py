@@ -20,6 +20,23 @@ class Gdsg_Contract_Core(models.Model):
     to_date = fields.Datetime('To date')
     description = fields.Text('Description')
 
+    contract_tuition = fields.Char('Contract Tuition')
+    actual_tuition = fields.Integer('Tuition')
+    material = fields.Integer('Material')
+    total_amount = fields.Integer('Total')
+    note = fields.Char('Note')
+    retains = fields.Selection([('rate', 'Rate'), ('fixed', 'Fixed')], required=True, default='rate')
+    rate = fields.Integer('Rate (%)')
+    fixed_amount = fields.Integer('Fixed amount')
+    refund_rate = fields.Integer('Refund rate (%)')
+    assistant_support = fields.Integer('Assistant Support')
+    teacher_remuneration = fields.Integer('Teacher remuneration')
+    outside = fields.Integer('Outside')
+    tax = fields.Integer('Tax (%)')
+    tuition_cit_tax = fields.Integer('CIT tax tuition')
+    material_cit_tax = fields.Integer('CIT tax material')
+    material_vat_tax = fields.Integer('Vat tax material')
+
     _sql_constraints = [
         ('name_uniq', 'unique (name)', """This contract has exist in system!"""),
     ]

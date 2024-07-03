@@ -55,6 +55,29 @@
                             <page name="description" string="Description">
                                 <field name="description"/>
                             </page>
+                            <page name="refund_info" string="Refund Information">
+                                <group>
+                                    <group>
+                                        <field name="retains"/>
+                                        <field name="rate" attrs="{'invisible': [('retains', '=', 'fixed')]}"/>
+                                        <field name="fixed_amount" attrs="{'invisible': [('retains', '=', 'rate')]}"/>
+                                        <field name="contract_tuition"/>
+                                        <field name="actual_tuition"/>
+                                        <field name="material"/>
+                                        <field name="total_amount"/>
+                                        <field name="note"/>
+                                    </group>
+                                    <group>
+                                        <field name="refund_rate"/>
+                                        <field name="assistant_support"/>
+                                        <field name="teacher_remuneration"/>
+                                        <field name="outside"/>
+                                        <field name="tuition_cit_tax"/>
+                                        <field name="material_cit_tax"/>
+                                        <field name="material_vat_tax"/>
+                                    </group>
+                                </group>
+                            </page>
                         </notebook>
                     </sheet>
                 </form>

@@ -10,6 +10,7 @@
         'views/gdsg_refund_rule_view.xml',
         'views/gdsg_refund_rate_view.xml',
         'views/gdsg_refund_structure_view.xml',
+        'views/gdsg_refund_core_view.xml',
         'menus/gdsg_refund_menu.xml',
     ],
     'sequence': 1,
