@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <!--sequence for gdsg_refund_core-->
+    <record id="seq_gdsg_refund_core" model="ir.sequence">
+        <field name="name">Gdsg Refund Core</field>
+        <field name="code">gdsg_refund.core</field>
+        <field name="prefix">RF</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+</odoo>

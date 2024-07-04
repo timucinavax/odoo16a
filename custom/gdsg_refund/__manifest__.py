@@ -6,6 +6,7 @@
     'depends': ['gdsg_contract'],
     'data': [
         'security/ir.model.access.csv',
+        'data/sequence_data.xml',
         'views/gdsg_refund_rule_category_view.xml',
         'views/gdsg_refund_rule_view.xml',
         'views/gdsg_refund_rate_view.xml',

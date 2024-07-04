@@ -5,7 +5,7 @@ class Refund_Core(models.Model):
     _name = 'gdsg_refund.core'
     _description = 'Refund Core'
 
-    name = fields.Char('Title', required=True)
+    name = fields.Char('Title', required=True, copy=False, readonly=True, default=lambda self: _('New'))
     partner_id = fields.Many2one('res.partner', string='Customer', required=True)
     contract_id = fields.Many2one('gdsg_contract.core', string='Contract', required=True)
     transaction_id = fields.Many2one('gdsg_contract.transaction', string='Revenue', required=True)
@@ -21,6 +21,13 @@ class Refund_Core(models.Model):
 
     def generate_data(self):
         self.name = "NEW1233445"
+
+    @api.model
+    def create(self, vals):
+        if vals.get('name', _('New')) == _('New'):
+            vals['name'] = self.env['ir.sequence'].next_by_code('gdsg_refund.core') or _('New')
+        res = super(Refund_Core, self).create(vals)
+        return res
 
 class Refund_Core_Line(models.Model):
     _name = 'gdsg_refund.core.lines'
