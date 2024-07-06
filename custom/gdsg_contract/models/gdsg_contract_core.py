@@ -20,7 +20,7 @@ class Gdsg_Contract_Core(models.Model):
     to_date = fields.Datetime('To date')
     description = fields.Text('Description')
 
-    contract_tuition = fields.Char('Contract Tuition')
+    contract_tuition = fields.Integer('Contract Tuition')
     actual_tuition = fields.Integer('Tuition')
     material = fields.Integer('Material')
     total_amount = fields.Integer('Total')

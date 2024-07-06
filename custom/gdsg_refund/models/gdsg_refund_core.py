@@ -1,5 +1,8 @@
 from odoo import models, fields, api, tools, _
+import re
+import logging
 
+_logger = logging.getLogger('gdsg_refund_core')
 
 class Refund_Core(models.Model):
     _name = 'gdsg_refund.core'
@@ -19,15 +22,42 @@ class Refund_Core(models.Model):
     tuition_price = fields.Integer('Tuition price')
     refund_line = fields.One2many('gdsg_refund.core.lines', 'refund_core_id')
 
-    def generate_data(self):
-        self.name = "NEW1233445"
-
     @api.model
     def create(self, vals):
         if vals.get('name', _('New')) == _('New'):
             vals['name'] = self.env['ir.sequence'].next_by_code('gdsg_refund.core') or _('New')
         res = super(Refund_Core, self).create(vals)
         return res
+
+    def generate_data(self):
+        try:
+            _logger.info('generate_data start!')
+            refund_line = self.env['gdsg_refund.core.lines'].sudo()
+            for structure in self.structure_id:
+                for rule in structure.rule_ids:
+                    python_code = rule.python_code
+                    if 'categories' in python_code:
+                        pattern = r'categories\.(\w+)'
+                        categories_matches = re.findall(pattern, python_code)
+                        for category in categories_matches:
+                            category_id = self.env['gdsg_refund.rule.category'].search([('code','=',category)]).id
+                            refund_lines = self.env['gdsg_refund.core.lines'].sudo().search([('refund_core_id','=',self.id),('category_id','=',category_id)])
+                            total = 0
+                            for refund_line in refund_lines:
+                                total += refund_line.amount
+                            python_code = python_code.replace('categories.' + category, str(total))
+                    else:
+                        python_code = python_code.replace('[gdsg_contract.core]', 'self.contract_id')
+                    result = eval(python_code)
+                    refund_line.create(dict(refund_core_id=self.id,
+                                            rule_id=rule.id,
+                                            category_id=rule.category_id.id,
+                                            amount=result))
+                    self.env.cr.commit()
+        except Exception as e:
+            _logger.error('generate_data exception: %s' % e)
+
+
 
 class Refund_Core_Line(models.Model):
     _name = 'gdsg_refund.core.lines'
