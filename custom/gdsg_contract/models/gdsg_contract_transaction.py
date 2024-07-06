@@ -31,8 +31,8 @@ class Gdsg_Contract_Transaction(models.Model):
 class Gdsg_Contract_Core(models.Model):
     _inherit = 'gdsg_contract.core'
 
-    sum_revenue = fields.Float('Sum revenue', compute='_compute_sum_revenue', default=0)
-    sum_expense = fields.Float('Sum expense', compute='_compute_sum_expense', default=0)
+    sum_revenue = fields.Float('Total revenue', compute='_compute_sum_revenue', default=0)
+    sum_expense = fields.Float('Total expense', compute='_compute_sum_expense', default=0)
 
     # @api.depends('revenue_list')
     def _compute_sum_revenue(self):

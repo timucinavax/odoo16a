@@ -91,13 +91,11 @@
                 <xpath expr="//form/sheet/div[@name='button_box']" position="inside">
                     <button name="revenue_sum_action" class="oe_stat_button" type="object"
                             icon="fa-address-book-o">
-                        <span class="o_stat_text">Total revenue:</span>
-                        <field class="o_stat_text" name="sum_revenue"/>
+                        <field class="o_stat_text" widget="statinfo" name="sum_revenue"/>
                     </button>
                     <button name="expense_sum_action" class="oe_stat_button" type="object"
                             icon="fa-address-book-o">
-                        <span class="o_stat_text">Total expense:</span>
-                        <field class="o_stat_text" name="sum_expense"/>
+                        <field class="o_stat_text" widget="statinfo" name="sum_expense"/>
                     </button>
                 </xpath>
             </field>
