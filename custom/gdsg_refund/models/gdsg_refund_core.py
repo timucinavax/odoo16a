@@ -32,6 +32,7 @@ class Refund_Core(models.Model):
     def generate_data(self):
         try:
             _logger.info('generate_data start!')
+            self.refund_line.unlink()
             refund_line = self.env['gdsg_refund.core.lines'].sudo()
             for structure in self.structure_id:
                 for rule in structure.rule_ids:

@@ -33,6 +33,7 @@
                                         <field name="name"/>
                                         <field name="code"/>
                                         <field name="sequence"/>
+                                        <field name="sequence" widget="handle"/>
                                     </tree>
                                 </field>
                             </page>
