@@ -59,7 +59,7 @@
                                 <group>
                                     <group>
                                         <field name="retains"/>
-                                        <field name="rate" attrs="{'invisible': [('retains', '=', 'fixed')]}"/>
+                                        <field name="rate" attrs="{'invisible': [('retains', '=', 'fixed')]}" widget="percentage"/>
                                         <field name="fixed_amount" attrs="{'invisible': [('retains', '=', 'rate')]}"/>
                                         <field name="contract_tuition"/>
                                         <field name="actual_tuition"/>
@@ -68,7 +68,7 @@
                                         <field name="note"/>
                                     </group>
                                     <group>
-                                        <field name="refund_rate"/>
+                                        <field name="refund_rate" widget="percentage"/>
                                         <field name="assistant_support"/>
                                         <field name="teacher_remuneration"/>
                                         <field name="outside"/>
