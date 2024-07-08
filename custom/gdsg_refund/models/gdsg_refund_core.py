@@ -35,7 +35,8 @@ class Refund_Core(models.Model):
             self.refund_line.unlink()
             refund_line = self.env['gdsg_refund.core.lines'].sudo()
             for structure in self.structure_id:
-                for rule in structure.rule_ids:
+                sorted_rules = sorted(structure.rule_ids, key=lambda rule: rule.sequence)
+                for rule in sorted_rules:
                     python_code = rule.python_code
                     if 'categories' in python_code:
                         pattern = r'categories\.(\w+)'
