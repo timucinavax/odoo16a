@@ -10,8 +10,8 @@ class Refund_Core(models.Model):
 
     name = fields.Char('Title', required=True, copy=False, readonly=True, default=lambda self: _('New'))
     partner_id = fields.Many2one('res.partner', string='Customer', required=True)
-    contract_id = fields.Many2one('gdsg_contract.core', string='Contract', required=True)
-    transaction_id = fields.Many2one('gdsg_contract.transaction', string='Revenue', required=True)
+    contract_id = fields.Many2one('gdsg_contract.core', string='Contract', required=True, domain="[('partner_id', '=', partner_id)]")
+    transaction_id = fields.Many2one('gdsg_contract.transaction', string='Revenue', required=True, domain="[('contract_id', '=', contract_id)]")
     refund_period = fields.Char('Refund period', required=True)
     structure_id = fields.Many2one('gdsg_refund.structure', string='Structure', required=True)
     description = fields.Char('Description')

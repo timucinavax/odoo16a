@@ -16,6 +16,9 @@ class Gdsg_Contract_Transaction(models.Model):
     origin = fields.Char('Origin')
     amount = fields.Float('Amount', required=True)
     move_id = fields.Char('Journal Entry')
+    students_invoice = fields.Integer('Students Invoice')
+    invoice_no = fields.Char('Invoice No')
+    invoice_code = fields.Char('Invoice Code')
 
     _sql_constraints = [
         ('name_uniq', 'unique (name)', """This transaction no has exist in system!"""),

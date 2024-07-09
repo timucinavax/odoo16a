@@ -33,12 +33,15 @@
                                 <field name="type"/>
                                 <field name="description"/>
                                 <field name="date"/>
+                                <field name="invoice_no"/>
+                                <field name="invoice_code"/>
                             </group>
                             <group>
                                 <field name="business"/>
                                 <field name="origin"/>
                                 <field name="amount"/>
                                 <field name="move_id"/>
+                                <field name="students_invoice"/>
                             </group>
                         </group>
                     </sheet>
