@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="layout" inherit_id="website.layout">
+    <xpath expr="//div[hasclass('o_frontend_to_backend_apps_menu')]/a" position="replace">
+        <a role="menuitem" class="dropdown-item"
+                       t-as="menu" t-foreach="env['ir.ui.menu'].with_context(force_action=True).load_menus_root()['children']"
+                       t-attf-href="/web#menu_id=#{menu['id']}&amp;action=#{menu['action'] and menu['action'].split(',')[1] or ''}">
+            <div t-if="menu['web_icon_data']" t-attf-style="background-image:url(data:image/png;base64,#{menu['web_icon_data']})"></div>
+            <div t-else="" t-attf-style="background-image:url('/base/static/description/icon.png')"></div>
+            <div t-esc="menu['name']" />
+        </a>
+    </xpath>
+</template>
+
+</odoo>

@@ -1,0 +1,34 @@
+.o_frontend_to_backend_apps_menu {
+    width: 600px;
+    height: 500px;
+    background: linear-gradient(to right bottom, #77717e, #c9a8a9);
+    background-size: cover;
+}
+
+.o_frontend_to_backend_apps_menu > a {
+    width: 20%;
+    float: left;
+    clear: none;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.o_frontend_to_backend_apps_menu > a > div:first-child {
+    margin: auto;
+    max-width: 70px;
+    overflow: hidden;
+    position: relative;
+    width: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 4%;
+    box-shadow: 0 8px 0 -10px black;
+    transition: all 0.3s ease 0s;
+}
+
+.o_frontend_to_backend_apps_menu > a > div:first-child:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+} 

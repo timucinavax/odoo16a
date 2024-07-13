@@ -1,0 +1,38 @@
+.o_navbar_apps_menu .o-dropdown--menu {
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right bottom, #77717e, #c9a8a9);
+    background-size: cover;
+}
+
+.dropdown-menu {
+  max-height: 90vh;
+}
+
+.o_navbar_apps_menu .o-dropdown--menu > a {
+    width: 20%;
+    float: left;
+    clear: none;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.o_app_icon {
+    margin: auto;
+    max-width: 70px;
+    overflow: hidden;
+    position: relative;
+    width: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 4%;
+    box-shadow: 0 8px 0 -10px black;
+    transition: all 0.3s ease 0s;
+}
+
+.o_app_icon:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+} 
