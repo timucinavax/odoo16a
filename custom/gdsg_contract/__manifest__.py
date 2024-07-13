@@ -1,6 +1,7 @@
 {
     'name': 'GDSG Contract',
     'version': '1.0',
+    'license': 'LGPL-3',
     'description': 'GDSG Contract',
     'author': 'son.truong',
     'depends': [],

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="report_gdsg_refund_core_xlsx" model="ir.actions.report">
+        <field name="name">Gdsg Refund Core Xlsx</field>
+        <field name="model">gdsg_refund.core</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">gdsg_refund.core.report_refund_xlsx</field>
+        <field name="report_file">gdsg_refund.core.report_refund_xlsx</field>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

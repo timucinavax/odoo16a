@@ -22,6 +22,7 @@
                 <form string="Core">
                     <header>
                         <button name="generate_data" string="Generate" type="object" class="oe_highlight"/>
+                        <button name="export_data_excel" string="Print Excel" type="object" class="oe_highlight"/>
                     </header>
                     <sheet>
                         <div class="oe_title">

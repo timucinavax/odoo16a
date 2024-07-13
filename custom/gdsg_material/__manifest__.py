@@ -1,6 +1,7 @@
 {
     'name': 'GDSG Material',
     'version': '1.0',
+    'license': 'LGPL-3',
     'description': 'GDSG Material',
     'author': 'son.truong',
     'depends': ['openeducat_timetable'],

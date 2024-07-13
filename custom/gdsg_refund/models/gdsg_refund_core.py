@@ -59,7 +59,17 @@ class Refund_Core(models.Model):
         except Exception as e:
             _logger.error('generate_data exception: %s' % e)
 
-
+    def export_data_excel(self):
+        try:
+            _logger.info('export_data_excel start!')
+            data = {
+                'form_data': self.read()[0]
+            }
+            return self.env.ref('gdsg_refund.report_gdsg_refund_core_xlsx').report_action(self, data=data)
+        except Exception as e:
+            _logger.error('export_data_excel exception: %s' % e)
+        finally:
+            _logger.info('export_data_excel finish!')
 
 class Refund_Core_Line(models.Model):
     _name = 'gdsg_refund.core.lines'
