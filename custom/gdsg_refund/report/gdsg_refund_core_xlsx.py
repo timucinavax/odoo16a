@@ -21,7 +21,7 @@ class Gdsg_refund_core_xlsx(models.AbstractModel):
             merge_format = workbook.add_format({'align': 'center'})
             footer_date = workbook.add_format({'italic': True, 'font_size': 12, 'align': 'right'})
             signment = workbook.add_format({'bold': True, 'font_size': 12, 'align': 'center'})
-            number = workbook.add_format({'num_format': '#,##0', 'border': 1})
+            number = workbook.add_format({'num_format': '#,##0.00', 'border': 1})
             line_border = workbook.add_format({'border': 1})
             line_header = workbook.add_format({'border': 1, 'bold': True})
 
@@ -36,7 +36,7 @@ class Gdsg_refund_core_xlsx(models.AbstractModel):
             company_vat = self.env.company.vat
             sheet.write(0, 0, company_name, bold)
             if company_vat:
-                sheet.write(1, 0, company_vat, bold)
+                sheet.write(1, 0, 'VAT: %s' % company_vat, bold)
             sheet.merge_range(3, 0, 3, 2, '', merge_format)
             sheet.write(3, 0, 'TIỀN HOÀN TRẢ LẠI TRƯỜNG', header)
             sheet.merge_range(4, 0, 4, 2, '', merge_format)
