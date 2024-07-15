@@ -63,7 +63,7 @@
                                         <field name="fixed_amount" attrs="{'invisible': [('retains', '=', 'rate')]}"/>
                                         <field name="contract_tuition"/>
                                         <field name="actual_tuition"/>
-                                        <field name="material"/>
+                                        <field name="material_price"/>
                                         <field name="total_amount"/>
                                         <field name="note"/>
                                     </group>

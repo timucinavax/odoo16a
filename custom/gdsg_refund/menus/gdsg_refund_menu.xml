@@ -5,17 +5,28 @@
                   name="Refund"
                   sequence="10"/>
 
+        <menuitem id="menu_gdsg_core_structure"
+                  name="Core"
+                  sequence="10"
+                  parent="menu_gdsg_refund_root"
+                  action="gdsg_refund_core_action"/>
+
+        <menuitem id="menu_gdsg_refund_rule_configuration"
+                  name="Configuration"
+                  sequence="20"
+                  parent="menu_gdsg_refund_root"
+                  action=""/>
 
         <menuitem id="menu_gdsg_refund_rule_category"
                   name="Rule Category"
                   sequence="10"
-                  parent="menu_gdsg_refund_root"
+                  parent="menu_gdsg_refund_rule_configuration"
                   action="gdsg_refund_rule_category_action"/>
 
         <menuitem id="menu_gdsg_refund_rule"
                   name="Rule"
                   sequence="20"
-                  parent="menu_gdsg_refund_root"
+                  parent="menu_gdsg_refund_rule_configuration"
                   action="gdsg_refund_rule_action"/>
 
 <!--        <menuitem id="menu_gdsg_refund_rate"-->
@@ -27,14 +38,10 @@
         <menuitem id="menu_gdsg_refund_structure"
                   name="Structure"
                   sequence="40"
-                  parent="menu_gdsg_refund_root"
+                  parent="menu_gdsg_refund_rule_configuration"
                   action="gdsg_refund_structure_action"/>
 
-        <menuitem id="menu_gdsg_core_structure"
-                  name="Core"
-                  sequence="50"
-                  parent="menu_gdsg_refund_root"
-                  action="gdsg_refund_core_action"/>
+
 
     </data>
 </odoo>

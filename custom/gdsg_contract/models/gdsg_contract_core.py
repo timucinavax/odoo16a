@@ -22,8 +22,8 @@ class Gdsg_Contract_Core(models.Model):
 
     contract_tuition = fields.Integer('Contract Tuition')
     actual_tuition = fields.Integer('Tuition')
-    material = fields.Integer('Material')
-    total_amount = fields.Integer('Total')
+    material_price = fields.Integer('Material Price')
+    total_amount = fields.Integer('Total', compute='_compute_total_amount')
     note = fields.Char('Note')
     retains = fields.Selection([('rate', 'Rate'), ('fixed', 'Fixed')], required=True, default='rate')
     rate = fields.Float('Rate (%)')
@@ -58,3 +58,8 @@ class Gdsg_Contract_Core(models.Model):
 
     def action_backtonew(self):
         self.state = 'new'
+
+    @api.onchange('actual_tuition','material_price')
+    def _compute_total_amount(self):
+        for rec in self:
+            rec.total_amount = rec.actual_tuition + rec.material_price

@@ -10,4 +10,4 @@ class Refund_Rule(models.Model):
     active = fields.Boolean('Active', default=True)
     sequence = fields.Integer('Sequence')
     category_id = fields.Many2one('gdsg_refund.rule.category','Rule Category')
-    python_code = fields.Text('Python Code')
+    python_code = fields.Text('Python Code', required=True, default='0')
