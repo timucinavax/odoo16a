@@ -69,12 +69,13 @@
                                     </group>
                                     <group>
                                         <field name="refund_rate" widget="percentage"/>
-                                        <field name="assistant_support"/>
-                                        <field name="teacher_remuneration"/>
-                                        <field name="outside"/>
-                                        <field name="tuition_cit_tax"/>
-                                        <field name="material_cit_tax"/>
-                                        <field name="material_vat_tax"/>
+                                        <field name="assistant_support" widget="monetary"/>
+                                        <field name="teacher_remuneration" widget="monetary"/>
+                                        <field name="outside" widget="monetary"/>
+                                        <field name="tuition_cit_tax" widget="percentage"/>
+                                        <field name="material_cit_tax" widget="percentage"/>
+                                        <field name="material_vat_tax" widget="percentage"/>
+                                        <field name="students_deal"/>
                                     </group>
                                 </group>
                             </page>
