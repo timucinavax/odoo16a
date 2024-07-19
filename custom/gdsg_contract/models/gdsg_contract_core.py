@@ -36,7 +36,7 @@ class Gdsg_Contract_Core(models.Model):
     tuition_cit_tax = fields.Float('CIT tax tuition')
     material_cit_tax = fields.Float('CIT tax material')
     material_vat_tax = fields.Float('Vat tax material')
-    students_deal = fields.Integer('Vat tax material')
+    students_deal = fields.Integer('Students deal')
 
     _sql_constraints = [
         ('name_uniq', 'unique (name)', """This contract has exist in system!"""),
