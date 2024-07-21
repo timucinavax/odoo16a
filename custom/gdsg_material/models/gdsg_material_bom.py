@@ -9,8 +9,8 @@ class Material_Bom(models.Model):
     contract_id = fields.Many2one('gdsg_contract.core', string='Contract', required=True)
     material_price = fields.Float('Material Price')
     topic_id = fields.Many2one('gdsg_contract.core.topic', string='Contract Topic', required=True, domain="[('contract_id','=',contract_id)]")
-    time = fields.Char('Time', compute='_compute_time')
-    min_student = fields.Float('Minimum Student')
+    time = fields.Integer('Time', compute='_compute_time')
+    min_student = fields.Float('Minimum Student', compute='_compute_min_student')
     group_student = fields.Integer('Student / Group', required=True)
     line_ids = fields.One2many('gdsg_material.bom.line', 'bom_id')
 
@@ -18,23 +18,33 @@ class Material_Bom(models.Model):
     def _compute_time(self):
         self.time = self.topic_id.time
 
-    @api.model
-    def create(self, vals):
+    @api.onchange('material_price','time','line_ids.amount')
+    def _compute_min_student(self):
         line_sum = 0
         for line in self.line_ids:
             line_sum += line.amount
-        rs = (line_sum / self.material_price) / 4 * self.time
-        self.min_student = rs
-        res = super(Refund_Core, self).create(vals)
-        return res
+        self.min_student = (line_sum / self.material_price) / 4 * self.time
 
-    @api.model
-    def update(self):
-        line_sum = 0
-        for line in self.line_ids:
-            line_sum += line.amount
-        rs = (line_sum / self.material_price) / 4 * self.time
-        self.min_student = rs
+    # @api.model
+    # def create(self, vals):
+    #     line_sum = 0
+    #     for line in vals['line_ids']:
+    #         line_sum += line[2]['amount']
+    #     topic = self.env['gdsg_contract.core.topic'].sudo().search([('id','=',vals['topic_id'])])
+    #     rs = (line_sum / vals['material_price']) / 4 * topic.time
+    #     vals['min_student'] = rs
+    #     res = super(Material_Bom, self).create(vals)
+    #     return res
+    #
+    # @api.model
+    # def write(self, records, value):
+    #     line_sum = 0
+    #     for line in self.line_ids:
+    #         line_sum += line.amount
+    #     rs = (line_sum / self.material_price) / 4 * self.time
+    #     self.min_student = rs
+    #     return super().write(records, value)
+
 
 class Material_Bom_Line(models.Model):
     _name = 'gdsg_material.bom.line'
