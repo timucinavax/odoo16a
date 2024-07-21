@@ -20,10 +20,11 @@ class Material_Bom(models.Model):
 
     @api.onchange('material_price','time','line_ids.amount')
     def _compute_min_student(self):
-        line_sum = 0
-        for line in self.line_ids:
-            line_sum += line.amount
-        self.min_student = (line_sum / self.material_price) / 4 * self.time
+        if self.material_price:
+            line_sum = 0
+            for line in self.line_ids:
+                line_sum += line.amount
+            self.min_student = (line_sum / self.material_price) / 4 * self.time
 
     # @api.model
     # def create(self, vals):
