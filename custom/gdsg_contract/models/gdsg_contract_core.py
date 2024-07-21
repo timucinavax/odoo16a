@@ -38,6 +38,8 @@ class Gdsg_Contract_Core(models.Model):
     material_vat_tax = fields.Float('Vat tax material')
     students_deal = fields.Integer('Students deal')
 
+    topic_ids = fields.One2many('gdsg_contract.core.topic', 'contract_id')
+
     _sql_constraints = [
         ('name_uniq', 'unique (name)', """This contract has exist in system!"""),
     ]
@@ -64,3 +66,12 @@ class Gdsg_Contract_Core(models.Model):
     def _compute_total_amount(self):
         for rec in self:
             rec.total_amount = rec.actual_tuition + rec.material_price
+
+class Gdsg_Contract_Topic(models.Model):
+    _name = 'gdsg_contract.core.topic'
+    _description = 'Contract Topic'
+
+    contract_id = fields.Many2one('gdsg_contract.core', string='Contract')
+    name = fields.Char('Topic name', required=True)
+    time = fields.Integer('Time', required=True)
+    description = fields.Char('Description')

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_gdsg_material_root"
+                  name="Material"
+                  sequence="10"/>
+
+            <menuitem id="menu_gdsg_material_product_parent"
+                      name="Product"
+                      sequence="30"
+                      parent="menu_gdsg_material_root"/>
+
+                <menuitem id="menu_gdsg_material_bom"
+                          name="BOM"
+                          sequence="20"
+                          parent="menu_gdsg_material_product_parent"
+                          action="gdsg_material_bom_action"/>
+
+<!--        <menuitem id="menu_gdsg_material_management"-->
+<!--                  name="Management"-->
+<!--                  sequence="10"-->
+<!--                  parent="menu_gdsg_material_root"-->
+<!--                  action="gdsg_material_management_action"/>-->
+
+<!--        <menuitem id="menu_gdsg_material_transaction"-->
+<!--                  name="Transaction"-->
+<!--                  sequence="20"-->
+<!--                  parent="menu_gdsg_material_root"-->
+<!--                  action="gdsg_material_transaction_action"/>-->
+
+    </data>
+</odoo>

@@ -79,6 +79,15 @@
                                     </group>
                                 </group>
                             </page>
+                            <page name="topic_ids" string="Topic">
+                                <field name="topic_ids" colspan="4" nolabel="1">
+                                    <tree editable="1">
+                                        <field name="name"/>
+                                        <field name="time"/>
+                                        <field name="description"/>
+                                    </tree>
+                                </field>
+                            </page>
                         </notebook>
                     </sheet>
                 </form>
