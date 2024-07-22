@@ -63,4 +63,6 @@ class Material_Bom_Line(models.Model):
 
     @api.onchange('product_id')
     def _compute_uom(self):
-        self.uom_id = self.product_id.uom_id
+        for line in self:
+            line.uom_id = line.product_id.uom_id
+            line.amount = line.product_id.standard_price
