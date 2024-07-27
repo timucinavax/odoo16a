@@ -3,6 +3,7 @@
     <data>
         <menuitem id="menu_gdsg_contract_root"
                   name="ContractManager"
+                  web_icon="gdsg_contract,static/description/icon.png"
                   sequence="10"/>
 
             <menuitem id="menu_gdsg_contract_activity_parent"

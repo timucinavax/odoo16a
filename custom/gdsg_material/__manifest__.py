@@ -12,6 +12,7 @@
         'views/op_session_inherit_view.xml',
         'views/gdsg_material_bom_view.xml',
         'menus/gdsg_material_menu.xml',
+        'data/warehouse_location_data.xml',
     ],
     'sequence': 1,
     'application': False,

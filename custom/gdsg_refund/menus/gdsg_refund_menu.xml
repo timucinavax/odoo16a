@@ -3,6 +3,7 @@
     <data>
         <menuitem id="menu_gdsg_refund_root"
                   name="Refund"
+                  web_icon="gdsg_refund,static/description/icon.png"
                   sequence="10"/>
 
         <menuitem id="menu_gdsg_core_structure"

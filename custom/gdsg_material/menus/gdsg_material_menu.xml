@@ -3,6 +3,7 @@
     <data>
         <menuitem id="menu_gdsg_material_root"
                   name="Material"
+                  web_icon="gdsg_material,static/description/icon.png"
                   sequence="10"/>
 
             <menuitem id="menu_gdsg_material_product_parent"
