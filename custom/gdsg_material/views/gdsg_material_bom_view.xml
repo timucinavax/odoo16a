@@ -39,28 +39,28 @@
                     <sheet>
                         <div class="oe_title">
                             <h1>
-                                <field name="name"/>
+                                <field name="name" attrs="{'readonly': [('state','in',['approved','export'])]}"/>
                             </h1>
                         </div>
                         <group>
                             <group>
-                                <field name="contract_id"/>
-                                <field name="material_price"/>
+                                <field name="contract_id" attrs="{'readonly': [('state','in',['approved','export'])]}"/>
+                                <field name="material_price" attrs="{'readonly': [('state','in',['approved','export'])]}"/>
                             </group>
                             <group>
-                                <field name="topic_id"/>
-                                <field name="time"/>
+                                <field name="topic_id" attrs="{'readonly': [('state','in',['approved','export'])]}"/>
+                                <field name="time" attrs="{'readonly': [('state','in',['approved','export'])]}"/>
                             </group>
                         </group>
                         <notebook>
                             <page name="line_ids" string="Bom Line">
-                                <field name="line_ids" colspan="4" nolabel="1">
+                                <field name="line_ids" colspan="4" nolabel="1" attrs="{'readonly': [('state','in',['approved','export'])]}">
                                     <tree editable="1">
                                         <field name="product_id"/>
                                         <field name="quantity"/>
                                         <field name="uom_id"/>
                                         <field name="require"/>
-                                        <field name="amount"/>
+                                        <field name="amount" readonly="0"/>
                                         <field name="note"/>
                                         <field name="use_for"/>
                                         <field name="total_export"/>
