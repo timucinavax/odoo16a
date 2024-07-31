@@ -21,6 +21,7 @@ class Material_Bom(models.Model):
     min_student = fields.Float('Minimum Student', compute='_compute_min_student', store=True)
     group_student = fields.Integer('Student / Group', required=True)
     class_student = fields.Integer('Student / Class')
+    stock_picking_id = fields.Many2one('stock.picking', string='Stock Picking')
     line_ids = fields.One2many('gdsg_material.bom.line', 'bom_id')
 
     @api.depends('contract_id')
@@ -85,7 +86,40 @@ class Material_Bom(models.Model):
         self.state = 'new'
 
     def action_export(self):
-        self.state = 'export'
+        try:
+            origin = 'MB'+self.name
+            stock_warehouse = self.env['stock.warehouse'].sudo().search([('code','=','WHNEW')])
+            stock_location = self.env['stock.location'].sudo().search([('barcode','=','WHNEW-STOCK')])
+            stock_dest_location = self.env['stock.location'].sudo().search([('barcode','=','WHNEW-OUTPUT')])
+            stock_picing_type = self.env['stock.picking.type'].sudo().search([('barcode','=','WHNEW-DELIVERY')])
+            if not stock_warehouse or not stock_location or not stock_picing_type or not stock_dest_location:
+                raise ValidationError(_("Cannot validate warehouse master data!!!"))
+            stock_picking = self.env['stock.picking'].sudo()
+            new_stock_picking = stock_picking.create(dict(partner_id=self.contract_id.partner_id.id,
+                                                          picking_type_id=stock_picing_type.id,
+                                                          origin=origin,
+                                                          ))
+            stock_move = self.env['stock.move'].sudo()
+            for line in self.line_ids:
+                product_product = self.env['product.product'].sudo().search([('product_tmpl_id','=',line.product_id.id)])
+                stock_move.create(dict(name=new_stock_picking.name,
+                                       picking_id=new_stock_picking.id,
+                                       origin=origin,
+                                       picking_type_id=stock_picing_type.id,
+                                       warehouse_id=stock_warehouse.id,
+                                       location_id=stock_location.id,
+                                       location_dest_id=stock_dest_location.id,
+                                       product_id=product_product.id,
+                                       product_uom_qty=line.total_export,
+                                       quantity_done=line.total_export
+                                       ))
+            new_stock_picking.button_validate()
+            new_stock_picking.action_toggle_is_locked()
+            self.stock_picking_id = new_stock_picking.id
+            self.state = 'export'
+        except Exception as e:
+            raise ValidationError(_(e))
+
 
 
 class Material_Bom_Line(models.Model):
@@ -136,4 +170,3 @@ class Material_Bom_Line(models.Model):
                 line.total_export = line.quantity * line.bom_id.group_student
             elif line.use_for == 'class':
                 line.total_export = line.quantity
-                

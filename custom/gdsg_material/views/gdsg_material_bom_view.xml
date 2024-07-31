@@ -46,6 +46,7 @@
                             <group>
                                 <field name="contract_id" attrs="{'readonly': [('state','in',['approved','export'])]}"/>
                                 <field name="material_price" attrs="{'readonly': [('state','in',['approved','export'])]}"/>
+                                <field name="stock_picking_id" readonly="1"/>
                             </group>
                             <group>
                                 <field name="topic_id" attrs="{'readonly': [('state','in',['approved','export'])]}"/>
