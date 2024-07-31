@@ -65,6 +65,7 @@
                                         <field name="actual_tuition"/>
                                         <field name="material_price"/>
                                         <field name="total_amount"/>
+                                        <field name="infra_fee"/>
                                         <field name="note"/>
                                     </group>
                                     <group>

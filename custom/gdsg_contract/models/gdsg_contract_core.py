@@ -37,6 +37,7 @@ class Gdsg_Contract_Core(models.Model):
     material_cit_tax = fields.Float('CIT tax material')
     material_vat_tax = fields.Float('Vat tax material')
     students_deal = fields.Integer('Students deal')
+    infra_fee = fields.Float('Infra Fee')
 
     topic_ids = fields.One2many('gdsg_contract.core.topic', 'contract_id')
 

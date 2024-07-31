@@ -18,8 +18,18 @@ class Refund_Core(models.Model):
     lesson = fields.Integer('Lesson')
     refund_school = fields.Integer('School percent')
     refund_company = fields.Integer('Company percent')
-    material_price = fields.Integer('Material price')
     tuition_price = fields.Integer('Tuition price')
+    invoice = fields.Char('Invoice', compute='_compute_invoice', store=True)
+    invoice_amount = fields.Float('Invoice amount', compute='_compute_invoice', store=True)
+    fixed_amount = fields.Float('Fix amount', compute='_compute_contract', store=True)
+    actual_tuition = fields.Integer('Actual Tuition', compute='_compute_contract', store=True)
+    material_price = fields.Integer('Material Price', compute='_compute_contract', store=True)
+    infra_fee = fields.Float('Infra Fee', compute='_compute_contract', store=True)
+    outside = fields.Float('Outside', compute='_compute_contract', store=True)
+    tuition_cit_tax = fields.Float('CIT Tax Tuition', compute='_compute_contract', store=True)
+    material_cit_tax = fields.Float('CIT Tax Material', compute='_compute_contract', store=True)
+    material_vat_tax = fields.Float('VAT Tax Material', compute='_compute_contract', store=True)
+
     refund_line = fields.One2many('gdsg_refund.core.lines', 'refund_core_id')
 
     @api.model
@@ -28,6 +38,22 @@ class Refund_Core(models.Model):
             vals['name'] = self.env['ir.sequence'].next_by_code('gdsg_refund.core') or _('New')
         res = super(Refund_Core, self).create(vals)
         return res
+
+    @api.onchange('transaction_id')
+    def _compute_invoice(self):
+        self.invoice = self.transaction_id.invoice_no + self.transaction_id.invoice_code
+        self.invoice_amount = self.transaction_id.amount
+
+    @api.onchange('contract_id')
+    def _compute_contract(self):
+        self.fixed_amount = self.contract_id.fixed_amount
+        self.actual_tuition = self.contract_id.actual_tuition
+        self.material_price = self.contract_id.material_price
+        self.infra_fee = self.contract_id.infra_fee
+        self.outside = self.contract_id.outside
+        self.tuition_cit_tax = self.contract_id.tuition_cit_tax
+        self.material_cit_tax = self.contract_id.material_cit_tax
+        self.material_vat_tax = self.contract_id.material_vat_tax
 
     def generate_data(self):
         try:
