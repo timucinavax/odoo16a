@@ -15,7 +15,7 @@ class Material_Bom(models.Model):
         ('cancel', 'Cancel')
     ], readonly=True, required=True, string='State', default='new')
     contract_id = fields.Many2one('gdsg_contract.core', string='Contract', required=True)
-    material_price = fields.Float('Material Price', compute='_compute_material_price')
+    material_price = fields.Float('Material Price', compute='_compute_material_price', store=True)
     topic_id = fields.Many2one('gdsg_contract.core.topic', string='Contract Topic', required=True, domain="[('contract_id','=',contract_id)]")
     time = fields.Integer('Time', compute='_compute_time', store=True)
     min_student = fields.Float('Minimum Student', compute='_compute_min_student', store=True)
