@@ -29,7 +29,8 @@ class Material_Bom(models.Model):
 
     @api.depends('topic_id')
     def _compute_time(self):
-        self.time = self.topic_id.time
+        if self.topic_id.time:
+            self.time = self.topic_id.time
 
     @api.depends('material_price','time','line_ids.amount')
     def _compute_min_student(self):
