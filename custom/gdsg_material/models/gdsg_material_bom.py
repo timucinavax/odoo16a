@@ -136,3 +136,4 @@ class Material_Bom_Line(models.Model):
                 line.total_export = line.quantity * line.bom_id.group_student
             elif line.use_for == 'class':
                 line.total_export = line.quantity
+                
