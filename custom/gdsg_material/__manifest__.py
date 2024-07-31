@@ -15,6 +15,6 @@
         'data/warehouse_location_data.xml',
     ],
     'sequence': 1,
-    'application': False,
+    'application': True,
     'installable': True
 }

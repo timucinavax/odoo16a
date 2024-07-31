@@ -1,5 +1,5 @@
 from odoo import models, fields, api, tools, _
-
+from odoo.exceptions import ValidationError
 
 class Material_Bom(models.Model):
     _name = 'gdsg_material.bom'
@@ -17,8 +17,8 @@ class Material_Bom(models.Model):
     contract_id = fields.Many2one('gdsg_contract.core', string='Contract', required=True)
     material_price = fields.Float('Material Price', compute='_compute_material_price')
     topic_id = fields.Many2one('gdsg_contract.core.topic', string='Contract Topic', required=True, domain="[('contract_id','=',contract_id)]")
-    time = fields.Integer('Time', compute='_compute_time')
-    min_student = fields.Float('Minimum Student', compute='_compute_min_student')
+    time = fields.Integer('Time', compute='_compute_time', store=True)
+    min_student = fields.Float('Minimum Student', compute='_compute_min_student', store=True)
     group_student = fields.Integer('Student / Group', required=True)
     class_student = fields.Integer('Student / Class')
     line_ids = fields.One2many('gdsg_material.bom.line', 'bom_id')
@@ -43,6 +43,30 @@ class Material_Bom(models.Model):
                 self.min_student = 0
         except Exception as e:
             pass
+
+    @api.model
+    def create(self, vals):
+        min_student = 0
+        if vals.get('material_price'):
+            line_sum = 0
+            for line in vals.get('line_ids'):
+                line_sum += line[2]['amount']
+            min_student = (line_sum / vals.get('material_price')) / 4 * vals.get('time')
+        if float(vals.get('group_student')) < min_student:
+            raise ValidationError(_("Group student can lower than min student"))
+        if vals.get('class_student') < 0:
+            raise ValidationError(_("Class student must be greater than zero"))
+        res = super(Material_Bom, self).create(vals)
+        return res
+
+    def write(self, vals):
+        if 'class_student' in vals:
+            if vals['class_student'] < 0:
+                raise ValidationError(_("Class student must be greater than zero"))
+        if 'group_student' in vals:
+            if float(vals['group_student']) < self.min_student:
+                raise ValidationError(_("Group student can lower than min student"))
+        return super(Material_Bom, self).write(vals)
 
     def action_send_approve(self):
         self.state = 'pending'
@@ -70,9 +94,9 @@ class Material_Bom_Line(models.Model):
     bom_id = fields.Many2one('gdsg_material.bom', string='Lines')
     product_id = fields.Many2one('product.template')
     quantity = fields.Integer('Quantity', required=True)
-    uom_id = fields.Many2one('uom.uom', string='Uom', compute='_compute_uom')
+    uom_id = fields.Many2one('uom.uom', string='Uom', compute='_compute_uom', store=True)
     require = fields.Char('Require')
-    amount = fields.Float('Amount', compute='_compute_amount')
+    amount = fields.Float('Amount', compute='_compute_amount', store=True)
     note = fields.Char('Note')
     use_for = fields.Selection([('student', 'Student'),('group', 'Group'),('class', 'Class')],
                                     required=True, default='student')
@@ -84,18 +108,12 @@ class Material_Bom_Line(models.Model):
         for line in self:
             line.uom_id = line.product_id.uom_id
 
-    @api.depends('product_id')
+    @api.onchange('product_id')
     def _compute_amount(self):
         for line in self:
-            if line.amount > 0:
-                continue
-            line.amount = line.product_id.standard_price
-
-    # def _inverse_amount(self):
-    #     # Implement your inverse function here
-    #     for line in self:
-    #         line.amount = line.amount
-    #         pass
+            line.update({
+                'amount': line.product_id.standard_price,
+            })
 
     @api.depends('product_id')
     def _compute_in_stock(self):
