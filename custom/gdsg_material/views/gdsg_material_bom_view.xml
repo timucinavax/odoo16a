@@ -9,7 +9,7 @@
                     <field name="name"/>
                     <field name="contract_id"/>
                     <field name="topic_id"/>
-                    <field name="state"/>
+                    <field name="state" widget="badge"/>
                 </tree>
             </field>
         </record>
@@ -65,7 +65,7 @@
                                         <field name="note"/>
                                         <field name="use_for"/>
                                         <field name="total_export"/>
-                                        <field name="in_stock"/>
+                                        <field name="in_stock" attrs="{'column_invisible': [('parent.state','in',['export'])]}"/>
                                     </tree>
                                 </field>
                             </page>

@@ -55,7 +55,7 @@ class Material_Bom(models.Model):
                 line_sum += line[2]['amount']
             min_student = (line_sum / vals.get('material_price')) / 4 * vals.get('time')
         if float(vals.get('group_student')) < min_student:
-            raise ValidationError(_("Group student can lower than min student"))
+            raise ValidationError(_("Group student can not lower than min student"))
         if vals.get('class_student') < 0:
             raise ValidationError(_("Class student must be greater than zero"))
         res = super(Material_Bom, self).create(vals)
@@ -67,7 +67,7 @@ class Material_Bom(models.Model):
                 raise ValidationError(_("Class student must be greater than zero"))
         if 'group_student' in vals:
             if float(vals['group_student']) < self.min_student:
-                raise ValidationError(_("Group student can lower than min student"))
+                raise ValidationError(_("Group student can not lower than min student"))
         return super(Material_Bom, self).write(vals)
 
     def action_send_approve(self):
@@ -87,10 +87,12 @@ class Material_Bom(models.Model):
 
     def action_export(self):
         try:
+            if not self.class_student:
+                raise ValidationError(_("Class student is not null"))
             origin = 'MB'+self.name
             stock_warehouse = self.env['stock.warehouse'].sudo().search([('code','=','WHNEW')])
             stock_location = self.env['stock.location'].sudo().search([('barcode','=','WHNEW-STOCK')])
-            stock_dest_location = self.env['stock.location'].sudo().search([('barcode','=','WHNEW-OUTPUT')])
+            stock_dest_location = self.env['stock.location'].sudo().search([('usage','=','customer')], limit=1)
             stock_picing_type = self.env['stock.picking.type'].sudo().search([('barcode','=','WHNEW-DELIVERY')])
             if not stock_warehouse or not stock_location or not stock_picing_type or not stock_dest_location:
                 raise ValidationError(_("Cannot validate warehouse master data!!!"))
@@ -127,7 +129,7 @@ class Material_Bom_Line(models.Model):
     _description = 'Material Bom Line'
 
     bom_id = fields.Many2one('gdsg_material.bom', string='Lines')
-    product_id = fields.Many2one('product.template')
+    product_id = fields.Many2one('product.template', domain="[('detailed_type','=','product')]")
     quantity = fields.Integer('Quantity', required=True)
     uom_id = fields.Many2one('uom.uom', string='Uom', compute='_compute_uom', store=True)
     require = fields.Char('Require')
