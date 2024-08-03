@@ -15,6 +15,7 @@ class Material_Bom(models.Model):
         ('cancel', 'Cancel')
     ], readonly=True, required=True, string='State', default='new')
     contract_id = fields.Many2one('gdsg_contract.core', string='Contract', required=True)
+    partner_id = fields.Many2one('res.partner', 'Partner', compute='_compute_material_price', store=True)
     material_price = fields.Float('Material Price', compute='_compute_material_price', store=True)
     topic_id = fields.Many2one('gdsg_contract.core.topic', string='Contract Topic', required=True, domain="[('contract_id','=',contract_id)]")
     time = fields.Integer('Time', compute='_compute_time', store=True)
@@ -24,9 +25,12 @@ class Material_Bom(models.Model):
     stock_picking_id = fields.Many2one('stock.picking', string='Stock Picking')
     line_ids = fields.One2many('gdsg_material.bom.line', 'bom_id')
 
+    bool_export = fields.Boolean(string="Bool export", invisible=True)
+
     @api.depends('contract_id')
     def _compute_material_price(self):
         self.material_price = self.contract_id.material_price
+        self.partner_id = self.contract_id.partner_id
 
     @api.depends('topic_id')
     def _compute_time(self):
@@ -155,12 +159,16 @@ class Material_Bom_Line(models.Model):
     @api.depends('product_id')
     def _compute_in_stock(self):
         stock_warehouse = self.env['stock.warehouse'].sudo().search([('code', '=', 'WHNEW')])
+        check_export = True
         for line in self:
             product_product = self.env['product.product'].sudo().search([('product_tmpl_id', '=', line.product_id.id)])
             stock_quant = self.env['stock.quant'].sudo().search(
                 [('location_id', '=', stock_warehouse.lot_stock_id.id), ('product_id', '=', product_product.id)],
                 limit=1)
             line.in_stock = stock_quant.available_quantity
+            if line.in_stock < line.total_export:
+                check_export = False
+        self.bom_id.bool_export = check_export
 
 
     @api.depends('product_id','quantity','use_for','bom_id.class_student','bom_id.group_student')
