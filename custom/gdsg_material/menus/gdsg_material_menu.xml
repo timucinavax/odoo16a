@@ -16,6 +16,12 @@
                           sequence="20"
                           parent="menu_gdsg_material_product_parent"
                           action="gdsg_material_bom_action"/>
+                <menuitem id="menu_gdsg_material_purchase_request"
+                          name="Purchase Request"
+                          sequence="30"
+                          parent="menu_gdsg_material_product_parent"
+                          action="gdsg_material_purchase_request_action"/>
+
 
 <!--        <menuitem id="menu_gdsg_material_management"-->
 <!--                  name="Management"-->

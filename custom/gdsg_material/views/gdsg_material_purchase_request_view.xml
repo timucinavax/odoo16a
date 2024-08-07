@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_gdsg_material_purchase_request_tree" model="ir.ui.view">
+            <field name="name">gdsg_material.purchase.request.tree</field>
+            <field name="model">gdsg_material.purchase.request</field>
+            <field name="arch" type="xml">
+                <tree string="Material Purchase Request">
+                    <field name="name"/>
+                    <field name="bom_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_gdsg_material_purchase_request_form" model="ir.ui.view">
+            <field name="name">gdsg_material.purchase.request.form</field>
+            <field name="model">gdsg_material.purchase.request</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Material Purchase Request">
+                    <header>
+                        <button name="action_generate_data" string="Generate" type="object" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="bom_ids"/>
+                        </group>
+                        <notebook>
+                            <page name="line_ids" string="PR Line">
+                                <field name="line_ids" colspan="4" nolabel="1">
+                                    <tree editable="1">
+                                        <field name="product_id"/>
+                                        <field name="total_export"/>
+                                        <field name="uom_id"/>
+                                        <field name="in_stock"/>
+                                        <field name="request_purchase"/>
+                                        <field name="convert_uom_id"/>
+                                        <field name="convert_request_purchase"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="gdsg_material_purchase_request_action">
+            <field name="name">Material Purchase Request</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">gdsg_material.purchase.request</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="gdsg_material_purchase_request_action_form">
+            <field name="act_window_id" ref="gdsg_material_purchase_request_action"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_gdsg_material_purchase_request_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="gdsg_material_purchase_request_action_tree">
+            <field name="act_window_id" ref="gdsg_material_purchase_request_action"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_gdsg_material_purchase_request_tree"/>
+        </record>
+    </data>
+</odoo>
