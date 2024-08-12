@@ -50,25 +50,30 @@
                         </group>
                         <group>
                             <group>
-                                <field name="actual_tuition" readonly="0"/>
-                                <field name="material_price" readonly="0"/>
-                                <field name="infra_fee" readonly="0"/>
+                                <group>
+                                    <field name="actual_tuition" readonly="0"/>
+                                    <field name="material_price" readonly="0"/>
+                                    <field name="infra_fee" readonly="0"/>
+                                </group>
+                                <group>
+                                    <field name="outside" readonly="0"/>
+                                    <field name="keep_tuition" readonly="0"/>
+                                    <field name="keep_material" readonly="0"/>
+                                </group>
                             </group>
                             <group>
-                                <field name="outside" readonly="0"/>
-                                <field name="keep_tuition" readonly="0"/>
-                                <field name="keep_material" readonly="0"/>
+                                <group>
+                                    <field name="p_tuition_cit_tax" readonly="0"/>
+                                    <field name="p_material_cit_tax" readonly="0"/>
+                                    <field name="p_material_vat_tax" readonly="0"/>
+                                </group>
+                                <group>
+                                    <field name="tuition_cit_tax" readonly="0"/>
+                                    <field name="material_cit_tax" readonly="0"/>
+                                    <field name="material_vat_tax" readonly="0"/>
+                                </group>
                             </group>
-                            <group>
-                                <field name="p_tuition_cit_tax" readonly="0"/>
-                                <field name="p_material_cit_tax" readonly="0"/>
-                                <field name="p_material_vat_tax" readonly="0"/>
-                            </group>
-                            <group>
-                                <field name="tuition_cit_tax" readonly="0"/>
-                                <field name="material_cit_tax" readonly="0"/>
-                                <field name="material_vat_tax" readonly="0"/>
-                            </group>
+
                         </group>
                         <notebook>
                             <page name="refund_line" string="Refund Line">
