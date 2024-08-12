@@ -51,10 +51,10 @@ class Refund_Core(models.Model):
 
     @api.onchange('ratio')
     def _inverse_ratio(self):
-        self.actual_tuition = self.ratio * self.actual_tuition
-        self.material_price = self.ratio * self.material_price
-        self.keep_tuition = self.ratio * self.keep_tuition
-        self.keep_material = self.ratio * self.keep_material
+        self.actual_tuition = self.ratio * self.contract_id.actual_tuition
+        self.material_price = self.ratio * self.contract_id.material_price
+        self.keep_tuition = self.ratio * self.contract_id.keep_tuition
+        self.keep_material = self.ratio * self.contract_id.keep_material
 
     @api.onchange('contract_id')
     def _compute_contract(self):
