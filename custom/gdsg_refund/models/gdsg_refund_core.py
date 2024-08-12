@@ -15,7 +15,7 @@ class Refund_Core(models.Model):
     refund_period = fields.Char('Refund period', required=True)
     structure_id = fields.Many2one('gdsg_refund.structure', string='Structure', required=True)
     description = fields.Char('Description')
-    lesson = fields.Integer('Lesson')
+    ratio = fields.Float('Ratio', default=1, inverse='_inverse_ratio')
     refund_school = fields.Integer('School percent')
     refund_company = fields.Integer('Company percent')
     tuition_price = fields.Integer('Tuition price')
@@ -27,8 +27,13 @@ class Refund_Core(models.Model):
     infra_fee = fields.Float('Infra Fee', compute='_compute_contract', store=True)
     outside = fields.Float('Outside', compute='_compute_contract', store=True)
     tuition_cit_tax = fields.Float('CIT Tax Tuition', compute='_compute_contract', store=True)
+    p_tuition_cit_tax = fields.Float('CIT Tax Tuition (%)', compute='_compute_contract', store=True)
     material_cit_tax = fields.Float('CIT Tax Material', compute='_compute_contract', store=True)
     material_vat_tax = fields.Float('VAT Tax Material', compute='_compute_contract', store=True)
+    p_material_cit_tax = fields.Float('CIT Tax Material (%)', compute='_compute_contract', store=True)
+    p_material_vat_tax = fields.Float('VAT Tax Material (%)', compute='_compute_contract', store=True)
+    keep_tuition = fields.Integer('Keep Tuition', compute='_compute_contract', store=True)
+    keep_material = fields.Integer('Keep Material', compute='_compute_contract', store=True)
 
     refund_line = fields.One2many('gdsg_refund.core.lines', 'refund_core_id')
 
@@ -44,16 +49,30 @@ class Refund_Core(models.Model):
         self.invoice = self.transaction_id.invoice_no + self.transaction_id.invoice_code
         self.invoice_amount = self.transaction_id.amount
 
+    @api.onchange('ratio')
+    def _inverse_ratio(self):
+        self.actual_tuition = self.ratio * self.actual_tuition
+        self.material_price = self.ratio * self.material_price
+        self.keep_tuition = self.ratio * self.keep_tuition
+        self.keep_material = self.ratio * self.keep_material
+
     @api.onchange('contract_id')
     def _compute_contract(self):
-        self.fixed_amount = self.contract_id.fixed_amount
-        self.actual_tuition = self.contract_id.actual_tuition
-        self.material_price = self.contract_id.material_price
-        self.infra_fee = self.contract_id.infra_fee
-        self.outside = self.contract_id.outside
-        self.tuition_cit_tax = self.contract_id.tuition_cit_tax
-        self.material_cit_tax = self.contract_id.material_cit_tax
-        self.material_vat_tax = self.contract_id.material_vat_tax
+        for record in self:
+            if record.contract_id:
+                record.fixed_amount = record.contract_id.fixed_amount
+                record.actual_tuition = record.contract_id.actual_tuition
+                record.material_price = record.contract_id.material_price
+                record.infra_fee = record.contract_id.infra_fee
+                record.outside = record.contract_id.outside
+                record.tuition_cit_tax = record.contract_id.tuition_cit_tax
+                record.p_tuition_cit_tax = record.contract_id.p_tuition_cit_tax
+                record.material_cit_tax = record.contract_id.material_cit_tax
+                record.material_vat_tax = record.contract_id.material_vat_tax
+                record.p_material_cit_tax = record.contract_id.p_material_cit_tax
+                record.p_material_vat_tax = record.contract_id.p_material_vat_tax
+                record.keep_tuition = record.contract_id.keep_tuition
+                record.keep_material = record.contract_id.keep_material
 
     def generate_data(self):
         try:

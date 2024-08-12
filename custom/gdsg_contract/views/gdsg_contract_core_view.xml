@@ -66,6 +66,8 @@
                                         <field name="material_price"/>
                                         <field name="total_amount"/>
                                         <field name="infra_fee"/>
+                                        <field name="keep_tuition"/>
+                                        <field name="keep_material"/>
                                         <field name="note"/>
                                     </group>
                                     <group>
@@ -73,9 +75,12 @@
                                         <field name="assistant_support" widget="monetary"/>
                                         <field name="teacher_remuneration" widget="monetary"/>
                                         <field name="outside" widget="monetary"/>
-                                        <field name="tuition_cit_tax" widget="percentage"/>
-                                        <field name="material_cit_tax" widget="percentage"/>
-                                        <field name="material_vat_tax" widget="percentage"/>
+                                        <field name="tuition_cit_tax"/>
+                                        <field name="p_tuition_cit_tax" widget="percentage"/>
+                                        <field name="material_cit_tax"/>
+                                        <field name="material_vat_tax"/>
+                                        <field name="p_material_cit_tax" widget="percentage"/>
+                                        <field name="p_material_vat_tax" widget="percentage"/>
                                         <field name="students_deal"/>
                                     </group>
                                 </group>
