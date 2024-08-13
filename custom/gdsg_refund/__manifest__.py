@@ -4,7 +4,7 @@
     'license': 'LGPL-3',
     'description': 'GDSG Refund',
     'author': 'son.truong',
-    'depends': ['gdsg_contract','report_xlsx'],
+    'depends': ['base','gdsg_contract','report_xlsx'],
     'data': [
         'security/ir.model.access.csv',
         'data/sequence_data.xml',
@@ -16,6 +16,11 @@
         'menus/gdsg_refund_menu.xml',
         'report/report.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'gdsg_refund/static/src/css/custom_styles.css',
+        ],
+    },
     'sequence': 1,
     'application': True,
     'installable': True

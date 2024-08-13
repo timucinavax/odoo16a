@@ -6,34 +6,63 @@
                   web_icon="gdsg_material,static/description/icon.png"
                   sequence="10"/>
 
-            <menuitem id="menu_gdsg_material_product_parent"
-                      name="Product"
-                      sequence="30"
+            <menuitem id="menu_gdsg_material_activity_parent"
+                      name="Activity"
+                      sequence="10"
                       parent="menu_gdsg_material_root"/>
 
                 <menuitem id="menu_gdsg_material_bom"
                           name="BOM"
-                          sequence="20"
-                          parent="menu_gdsg_material_product_parent"
+                          sequence="10"
+                          parent="menu_gdsg_material_activity_parent"
                           action="gdsg_material_bom_action"/>
                 <menuitem id="menu_gdsg_material_purchase_request"
                           name="Purchase Request"
-                          sequence="30"
-                          parent="menu_gdsg_material_product_parent"
+                          sequence="20"
+                          parent="menu_gdsg_material_activity_parent"
                           action="gdsg_material_purchase_request_action"/>
+                <menuitem id="menu_gdsg_material_stock_picking"
+                          name="Stock Picking"
+                          sequence="30"
+                          parent="menu_gdsg_material_activity_parent"
+                          action="stock.action_picking_tree_all"/>
 
+            <menuitem id="menu_gdsg_material_purchase_order_parent"
+                      name="Purchase Order"
+                      sequence="20"
+                      parent="menu_gdsg_material_root"
+                      action="purchase.purchase_rfq"/>
 
-<!--        <menuitem id="menu_gdsg_material_management"-->
-<!--                  name="Management"-->
-<!--                  sequence="10"-->
-<!--                  parent="menu_gdsg_material_root"-->
-<!--                  action="gdsg_material_management_action"/>-->
+            <menuitem id="menu_gdsg_material_products_parent"
+                      name="Products"
+                      sequence="30"
+                      parent="menu_gdsg_material_root"
+                      action="product.product_template_action_all"/>
 
-<!--        <menuitem id="menu_gdsg_material_transaction"-->
-<!--                  name="Transaction"-->
-<!--                  sequence="20"-->
-<!--                  parent="menu_gdsg_material_root"-->
-<!--                  action="gdsg_material_transaction_action"/>-->
+            <menuitem id="menu_gdsg_material_reports_parent"
+                      name="Reports"
+                      sequence="40"
+                      parent="menu_gdsg_material_root"/>
+                <menuitem id="menu_gdsg_material_purchase_order_report"
+                          name="Purchase Order"
+                          sequence="10"
+                          parent="menu_gdsg_material_reports_parent"
+                          action="purchase.action_purchase_order_report_all"/>
+                <menuitem id="menu_gdsg_material_stock_report"
+                          name="Stock"
+                          sequence="20"
+                          parent="menu_gdsg_material_reports_parent"
+                          action="stock.action_product_stock_view"/>
+                <menuitem id="menu_gdsg_material_stock_move_report"
+                          name="Stock Move"
+                          sequence="30"
+                          parent="menu_gdsg_material_reports_parent"
+                          action="stock.stock_move_action"/>
+                <menuitem id="menu_gdsg_material_stock_move_line_report"
+                          name="Stock Move Line"
+                          sequence="40"
+                          parent="menu_gdsg_material_reports_parent"
+                          action="stock.stock_move_line_action"/>
 
     </data>
 </odoo>

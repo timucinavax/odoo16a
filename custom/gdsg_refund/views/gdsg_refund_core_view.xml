@@ -78,9 +78,10 @@
                         <notebook>
                             <page name="refund_line" string="Refund Line">
                                 <field name="refund_line" colspan="4" nolabel="1">
-                                    <tree editable="1">
+                                    <tree editable="bottom" decoration-success="category_code == 'SUBTOTAL'">
                                         <field name="rule_id"/>
                                         <field name="category_id"/>
+                                        <field name="category_code"/>
                                         <field name="amount"/>
                                         <field name="note"/>
                                     </tree>

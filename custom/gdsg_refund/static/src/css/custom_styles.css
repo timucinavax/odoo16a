@@ -1,0 +1,9 @@
+.o_data_row.decoration-success {
+    font-weight: bold;
+    color: green; /* Example style */
+    background-color: #e0ffe0; /* Example style */
+}
+
+/*.o_data_row {*/
+/*    font-weight: bold;*/
+/*}*/

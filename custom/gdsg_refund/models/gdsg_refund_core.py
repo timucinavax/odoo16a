@@ -125,6 +125,7 @@ class Refund_Core_Line(models.Model):
     category_id = fields.Many2one('gdsg_refund.rule.category', string='Category')
     amount = fields.Float('Amount')
     note = fields.Char('Note')
+    category_code = fields.Char('Category Code', related='category_id.code', store=True)
 
 
 
