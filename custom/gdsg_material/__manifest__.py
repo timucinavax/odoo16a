@@ -4,7 +4,7 @@
     'license': 'LGPL-3',
     'description': 'GDSG Material',
     'author': 'son.truong',
-    'depends': ['product'],
+    'depends': ['product', 'stock'],
     'data': [
         'security/ir.model.access.csv',
         'views/gdsg_material_management_view.xml',

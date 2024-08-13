@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
-
+<odoo noupdate="1">
     <record id="stock_warehouse_new" model="stock.warehouse">
         <field name="name">Warehouse New</field>
         <field name="code">WHNEW</field>
     </record>
-
     <record id="stock_warehouse_reuse" model="stock.warehouse">
         <field name="name">Warehouse Reuse</field>
         <field name="code">WHRU</field>
     </record>
-
 </odoo>
