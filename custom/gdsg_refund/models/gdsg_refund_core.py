@@ -9,6 +9,14 @@ class Refund_Core(models.Model):
     _description = 'Refund Core'
 
     name = fields.Char('Title', required=True, copy=False, readonly=True, default=lambda self: _('New'))
+    state = fields.Selection([
+        ('new', 'New'),
+        ('pending', 'Pending'),
+        ('approved', 'Approved'),
+        ('refuse', 'Refuse'),
+        ('export', 'Export'),
+        ('cancel', 'Cancel')
+    ], readonly=True, required=True, string='State', default='new')
     partner_id = fields.Many2one('res.partner', string='Customer', required=True)
     contract_id = fields.Many2one('gdsg_contract.core', string='Contract', required=True, domain="[('partner_id', '=', partner_id)]")
     transaction_id = fields.Many2one('gdsg_contract.transaction', string='Revenue', required=True, domain="[('contract_id', '=', contract_id)]")
@@ -43,6 +51,21 @@ class Refund_Core(models.Model):
             vals['name'] = self.env['ir.sequence'].next_by_code('gdsg_refund.core') or _('New')
         res = super(Refund_Core, self).create(vals)
         return res
+
+    def action_send_approve(self):
+        self.state = 'pending'
+
+    def action_approve(self):
+        self.state = 'approved'
+
+    def action_refuse(self):
+        self.state = 'refuse'
+
+    def action_cancel(self):
+        self.state = 'cancel'
+
+    def action_backtonew(self):
+        self.state = 'new'
 
     @api.onchange('transaction_id')
     def _compute_invoice(self):
