@@ -168,6 +168,8 @@ class Material_Bom_Line(models.Model):
             line.in_stock = stock_quant.available_quantity
             if line.in_stock < line.total_export:
                 check_export = False
+        if self.bom_id.class_student == 0:
+            check_export = False
         self.bom_id.bool_export = check_export
 
 

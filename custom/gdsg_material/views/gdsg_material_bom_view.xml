@@ -5,13 +5,14 @@
             <field name="name">gdsg_material.bom.tree</field>
             <field name="model">gdsg_material.bom</field>
             <field name="arch" type="xml">
-                <tree string="Material Bom">
+                <tree string="Material Bom" default_order="create_date desc">
                     <field name="name"/>
                     <field name="contract_id"/>
                     <field name="partner_id"/>
                     <field name="topic_id"/>
                     <field name="state" widget="badge" decoration-warning="state == 'pending'"
                            decoration-danger="state in ('refuse','cancel')" decoration-success="state in ('approved','export')"/>
+                    <field name="create_date"/>
                 </tree>
             </field>
         </record>
