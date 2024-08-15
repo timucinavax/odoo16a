@@ -26,10 +26,13 @@
                                 <field name="name"/>
                                 <field name="code"/>
                                 <field name="category_id"/>
+                                <field name="sequence"/>
                             </group>
                             <group>
-                                <field name="active"/>
-                                <field name="sequence"/>
+                                <field name="active" widget="boolean_toggle"/>
+                                <field name="print_perstudent" widget="boolean_toggle"/>
+                                <field name="print_company" widget="boolean_toggle"/>
+                                <field name="print_school" widget="boolean_toggle"/>
                             </group>
                         </group>
                         <group>

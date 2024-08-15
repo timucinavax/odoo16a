@@ -29,6 +29,8 @@ class Gdsg_refund_core_xlsx(models.AbstractModel):
             sheet.set_column('A:A', 30)
             sheet.set_column('B:B', 15)
             sheet.set_column('C:C', 15)
+            sheet.set_column('D:D', 15)
+            sheet.set_column('E:E', 15)
             self_data_id = data['form_data']['id']
             refund_data = self.env['gdsg_refund.core'].sudo().browse(int(self_data_id))
             #header
@@ -37,38 +39,54 @@ class Gdsg_refund_core_xlsx(models.AbstractModel):
             sheet.write(0, 0, company_name, bold)
             if company_vat:
                 sheet.write(1, 0, 'VAT: %s' % company_vat, bold)
-            sheet.merge_range(3, 0, 3, 2, '', merge_format)
+            sheet.merge_range(3, 0, 3, 5, '', merge_format)
             sheet.write(3, 0, 'TIỀN HOÀN TRẢ LẠI TRƯỜNG', header)
-            sheet.merge_range(4, 0, 4, 2, '', merge_format)
+            sheet.merge_range(4, 0, 4, 5, '', merge_format)
             sheet.write(4, 0, 'Tháng hoàn tiền: %s' % refund_data.refund_period, header1)
-            sheet.merge_range(5, 0, 5, 2, '', merge_format)
+            sheet.merge_range(5, 0, 5, 5, '', merge_format)
             sheet.write(5, 0, refund_data.partner_id.name, header1)
             sheet.write(7, 0, 'Khoản mục', line_header)
             sheet.write(7, 1, 'Giá trị', line_header)
-            sheet.write(7, 2, 'Ghi chú', line_header)
+            sheet.write(7, 2, 'Đơn giá', line_header)
+            sheet.write(7, 3, 'Công ty nhận', line_header)
+            sheet.write(7, 4, 'Trường nhận', line_header)
+            sheet.write(7, 5, 'Ghi chú', line_header)
 
             row = 8
             #details
             for line in refund_data.refund_line:
                 sheet.write(row, 0, line.rule_id.name, line_border)
                 sheet.write(row, 1, line.amount, number)
-                if line.note:
-                    sheet.write(row, 2, line.note, line_border)
+                if line.rule_id.print_perstudent:
+                    sheet.write(row, 2, abs(line.amount), number)
                 else:
                     sheet.write(row, 2, '', line_border)
+                if line.rule_id.print_company:
+                    sheet.write(row, 3, abs(line.amount), number)
+                else:
+                    sheet.write(row, 3, '', line_border)
+                if line.rule_id.print_school:
+                    sheet.write(row, 4, abs(line.amount), number)
+                else:
+                    sheet.write(row, 4, '', line_border)
+                if line.note:
+                    sheet.write(row, 5, line.note, line_border)
+                else:
+                    sheet.write(row, 5, '', line_border)
                 row += 1
 
 
             #footer
             row += 1
-            sheet.merge_range(row, 0, row, 2, '', merge_format)
+            sheet.merge_range(row, 0, row, 5, '', merge_format)
             sheet.write(row, 0, 'TP.Hồ Chí Minh, ngày %s tháng %s năm %s' % (datetime.strftime(datetime.utcnow(), '%d')
                                                                            , datetime.strftime(datetime.utcnow(), '%m')
                                                                            , datetime.strftime(datetime.utcnow(), '%Y')), footer_date)
             row += 1
+            sheet.merge_range(row, 0, row, 1, '', merge_format)
             sheet.write(row, 0, 'Xác nhận của công ty', signment)
-            sheet.merge_range(row, 1, row, 2, '', merge_format)
-            sheet.write(row, 1, 'Xác nhận của nhà trường', signment)
+            sheet.merge_range(row, 3, row, 5, '', merge_format)
+            sheet.write(row, 3, 'Xác nhận của nhà trường', signment)
         except Exception as e:
             _logger.error('generate_xlsx_report exception: %s' % e)
 
