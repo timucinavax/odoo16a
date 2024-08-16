@@ -20,6 +20,7 @@
                 <form string="Material Purchase Request">
                     <header>
                         <button name="action_generate_data" string="Generate" type="object" class="oe_highlight"/>
+                        <button name="action_printexcel" string="Print Excel" type="object" class="oe_highlight"/>
                     </header>
                     <sheet>
                         <div class="oe_title">
@@ -41,6 +42,7 @@
                                         <field name="request_purchase"/>
                                         <field name="convert_uom_id"/>
                                         <field name="convert_request_purchase"/>
+                                        <field name="note"/>
                                     </tree>
                                 </field>
                             </page>

@@ -30,6 +30,14 @@ class Material_Purchase_Request(models.Model):
         print(result)
         # self.line_ids.create(dict(product=))
 
+    def action_printexcel(self):
+        try:
+            data = {
+                'form_data': self.read()[0]
+            }
+            return self.env.ref('gdsg_material.report_gdsg_material_purchase_request_xlsx').report_action(self, data=data)
+        except Exception as e:
+            raise ValidationError(_(e))
 
 class Material_Purchase_Request_Line(models.Model):
     _name = 'gdsg_material.purchase.request.line'
@@ -43,6 +51,7 @@ class Material_Purchase_Request_Line(models.Model):
     request_purchase = fields.Float('Request Purchase', compute='_compute_uom')
     convert_uom_id = fields.Many2one('uom.uom', string='Uom', compute='_compute_uom', store=True)
     convert_request_purchase = fields.Float('Convert Request Purchase')
+    note = fields.Char('Note')
 
     @api.depends('product_id')
     def _compute_uom(self):
@@ -50,7 +59,8 @@ class Material_Purchase_Request_Line(models.Model):
             line.uom_id = line.product_id.uom_id.id
             line.convert_uom_id = line.product_id.purchase_uom_id.id
             line.request_purchase = line.total_export - line.in_stock
-            line.convert_request_purchase = (line.total_export - line.in_stock) * line.product_id.uom_id.factor / line.product_id.purchase_uom_id.factor
+            if line.product_id.purchase_uom_id.factor > 0:
+                line.convert_request_purchase = (line.total_export - line.in_stock) * line.product_id.uom_id.factor / line.product_id.purchase_uom_id.factor
 
     @api.depends('product_id')
     def _compute_in_stock(self):

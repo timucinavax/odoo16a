@@ -22,6 +22,7 @@ class Material_Bom(models.Model):
     min_student = fields.Float('Minimum Student', compute='_compute_min_student', store=True)
     group_student = fields.Integer('Student / Group', required=True)
     class_student = fields.Integer('Student / Class')
+    class_num = fields.Integer('Class')
     stock_picking_id = fields.Many2one('stock.picking', string='Stock Picking')
     line_ids = fields.One2many('gdsg_material.bom.line', 'bom_id')
 
@@ -126,7 +127,14 @@ class Material_Bom(models.Model):
         except Exception as e:
             raise ValidationError(_(e))
 
-
+    def action_printexcel(self):
+        try:
+            data = {
+                'form_data': self.read()[0]
+            }
+            return self.env.ref('gdsg_material.report_gdsg_material_bom_xlsx').report_action(self, data=data)
+        except Exception as e:
+            raise ValidationError(_(e))
 
 class Material_Bom_Line(models.Model):
     _name = 'gdsg_material.bom.line'
@@ -139,7 +147,7 @@ class Material_Bom_Line(models.Model):
     require = fields.Char('Require')
     amount = fields.Float('Amount', compute='_compute_amount', store=True)
     note = fields.Char('Note')
-    use_for = fields.Selection([('student', 'Student'),('group', 'Group'),('class', 'Class')],
+    use_for = fields.Selection([('student', 'Student'),('group', 'Group'),('class', 'Class'),('teacher', 'Teacher')],
                                     required=True, default='student')
     total_export = fields.Float('Total export', compute='_compute_total_export')
     in_stock = fields.Float('In stock', compute='_compute_in_stock')
@@ -181,4 +189,6 @@ class Material_Bom_Line(models.Model):
             elif line.use_for == 'group':
                 line.total_export = line.quantity * line.bom_id.group_student
             elif line.use_for == 'class':
+                line.total_export = line.quantity
+            elif line.use_for == 'teacher':
                 line.total_export = line.quantity

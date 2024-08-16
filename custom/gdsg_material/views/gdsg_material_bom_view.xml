@@ -36,6 +36,7 @@
                                 attrs="({'invisible': ['|',('state', 'not in', ['approved']),('bool_export','=',False)]})"/>
                         <button name="action_backtonew" string="Back to New" type="object" class="oe_highlight"
                                 attrs="{'invisible': [('state', 'not in', ['cancel','refuse'])]}"/>
+                        <button name="action_printexcel" string="Print Excel" type="object" class="oe_highlight"/>
                         <field name="state" widget="statusbar" class="o_field_statusbar"
                                    statusbar_visible="new,pending,approved,export"/>
                     </header>
@@ -55,6 +56,7 @@
                             <group>
                                 <field name="topic_id" attrs="{'readonly': [('state','in',['approved','export'])]}"/>
                                 <field name="time" attrs="{'readonly': [('state','in',['approved','export'])]}"/>
+                                <field name="class_num" attrs="{'readonly': [('state','in',['approved','export'])]}"/>
                                 <field name="bool_export" invisible="1" readonly="1"/>
                             </group>
                         </group>

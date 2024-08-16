@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="report_gdsg_material_bom_xlsx" model="ir.actions.report">
+        <field name="name">Gdsg Material Bom Xlsx</field>
+        <field name="model">gdsg_material.bom</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">gdsg_material.bom.report_material_xlsx</field>
+        <field name="report_file">gdsg_material.bom.report_material_xlsx</field>
+        <field name="binding_type">report</field>
+    </record>
+    <record id="report_gdsg_stock_picking_xlsx" model="ir.actions.report">
+        <field name="name">Gdsg Stock Picking Xlsx</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">stock.picking.report_stock_picking_xlsx</field>
+        <field name="report_file">stock.picking.report_stock_picking_xlsx</field>
+        <field name="binding_type">report</field>
+    </record>
+    <record id="report_gdsg_material_purchase_request_xlsx" model="ir.actions.report">
+        <field name="name">Gdsg Material Purchase Request Xlsx</field>
+        <field name="model">gdsg_material.purchase.request</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">gdsg_material.report_purchase_request_xlsx</field>
+        <field name="report_file">gdsg_material.report_purchase_request_xlsx</field>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
