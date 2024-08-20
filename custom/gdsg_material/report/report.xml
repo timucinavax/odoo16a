@@ -8,12 +8,20 @@
         <field name="report_file">gdsg_material.bom.report_material_xlsx</field>
         <field name="binding_type">report</field>
     </record>
-    <record id="report_gdsg_stock_picking_xlsx" model="ir.actions.report">
-        <field name="name">Gdsg Stock Picking Xlsx</field>
+    <record id="report_gdsg_stock_picking_in_xlsx" model="ir.actions.report">
+        <field name="name">Gdsg Stock Picking In Xlsx</field>
         <field name="model">stock.picking</field>
         <field name="report_type">xlsx</field>
-        <field name="report_name">stock.picking.report_stock_picking_xlsx</field>
-        <field name="report_file">stock.picking.report_stock_picking_xlsx</field>
+        <field name="report_name">stock.picking.report_stock_picking_in_xlsx</field>
+        <field name="report_file">stock.picking.report_stock_picking_in_xlsx</field>
+        <field name="binding_type">report</field>
+    </record>
+    <record id="report_gdsg_stock_picking_out_xlsx" model="ir.actions.report">
+        <field name="name">Gdsg Stock Picking Out Xlsx</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">stock.picking.report_stock_picking_out_xlsx</field>
+        <field name="report_file">stock.picking.report_stock_picking_out_xlsx</field>
         <field name="binding_type">report</field>
     </record>
     <record id="report_gdsg_material_purchase_request_xlsx" model="ir.actions.report">
