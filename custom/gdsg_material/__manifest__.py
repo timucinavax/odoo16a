@@ -4,7 +4,7 @@
     'license': 'LGPL-3',
     'description': 'GDSG Material',
     'author': 'son.truong',
-    'depends': ['product', 'stock', 'purchase', 'report_xlsx'],
+    'depends': ['product', 'stock', 'purchase', 'report_xlsx', 'contacts'],
     'data': [
         'security/ir.model.access.csv',
         'data/warehouse_location_data.xml',
@@ -14,6 +14,7 @@
         # 'views/op_session_inherit_view.xml',
         'views/product_template_inherit_view.xml',
         'views/stock_picking_inherit_view.xml',
+        'views/res_partner_inherit_view.xml',
         'views/gdsg_material_bom_view.xml',
         'menus/gdsg_material_menu.xml',
         'report/report.xml',

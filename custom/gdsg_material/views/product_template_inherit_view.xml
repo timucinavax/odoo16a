@@ -15,5 +15,67 @@
                 </xpath>
             </field>
         </record>
+
+        <record id="view_product_template_tree_inherit" model="ir.ui.view">
+            <field name="name">product.template.tree.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="replace">
+                    <tree string="Product" multi_edit="1" sample="1">
+                        <header>
+                            <button string="Print Labels" type="object" name="action_open_label_layout"/>
+                        </header>
+                        <field name="product_variant_count" invisible="1"/>
+                        <field name="sale_ok" invisible="1"/>
+                        <field name="currency_id" invisible="1"/>
+                        <field name="cost_currency_id" invisible="1"/>
+                        <field name="priority" widget="priority" optional="hide" nolabel="1"/>
+                        <field name="default_code" optional="show"/>
+                        <field name="name" string="Product Name"/>
+                        <field name="uom_id" readonly="1" optional="show" groups="uom.group_uom"/>
+                        <field name="barcode" optional="hide" attrs="{'readonly': [('product_variant_count', '&gt;', 1)]}"/>
+                        <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company" optional="hide"/>
+                        <field name="list_price" string="Sales Price" widget="monetary" options="{'currency_field': 'currency_id'}" optional="hide" decoration-muted="not sale_ok"/>
+                        <field name="standard_price" widget="monetary" options="{'currency_field': 'cost_currency_id'}" optional="show" readonly="1"/>
+                        <field name="product_tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" optional="show"/>
+                        <field name="categ_id" optional="hide"/>
+                        <field name="detailed_type" optional="hide" readonly="1"/>
+                        <field name="type" invisible="1"/>
+                        <field name="active" invisible="1"/>
+                        <field name="activity_exception_decoration" widget="activity_exception"/>
+                    </tree>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="product_template_action_all" model="ir.actions.act_window">
+            <field name="name">Products</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new product 123
+                </p>
+            </field>
+        </record>
+
+        <record id="view_stock_product_template_tree" model="ir.ui.view">
+            <field name="name">product.template.stock.tree.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="uom_id" position="before">
+                    <field name="show_on_hand_qty_status_button" invisible="1" groups="stock.group_stock_user"/>
+                    <field name="qty_available" attrs="{'invisible':[('show_on_hand_qty_status_button', '=', False)]}" optional="show" decoration-danger="qty_available &lt; 0" groups="stock.group_stock_user"/>
+                    <field name="virtual_available" attrs="{'invisible':[('show_on_hand_qty_status_button', '=', False)]}" optional="hide" decoration-danger="virtual_available &lt; 0" decoration-bf="1" groups="stock.group_stock_user"/>
+                </field>
+                <field name="default_code" position="after">
+                    <field name="responsible_id" widget="many2one_avatar_user" groups="stock.group_stock_user" optional="hide"/>
+                </field>
+            </field>
+        </record>
     </data>
 </odoo>

@@ -27,6 +27,12 @@
                           parent="menu_gdsg_material_activity_parent"
                           action="stock.action_picking_tree_all"/>
 
+            <menuitem id="menu_gdsg_material_contact_parent"
+                      name="Contact"
+                      sequence="19"
+                      parent="menu_gdsg_material_root"
+                      action="base.action_partner_form"/>
+
             <menuitem id="menu_gdsg_material_purchase_order_parent"
                       name="Purchase Order"
                       sequence="20"
@@ -63,6 +69,41 @@
                           sequence="40"
                           parent="menu_gdsg_material_reports_parent"
                           action="stock.stock_move_line_action"/>
+
+            <menuitem id="menu_gdsg_material_config_parent"
+                      name="Configuration"
+                      sequence="50"
+                      parent="menu_gdsg_material_root"/>
+                <menuitem id="menu_gdsg_material_config_setting"
+                          name="Setting"
+                          sequence="10"
+                          parent="menu_gdsg_material_config_parent"
+                          action="stock.action_stock_config_settings"/>
+                <menuitem id="menu_gdsg_material_config_warehouse"
+                          name="Warehouse"
+                          sequence="20"
+                          parent="menu_gdsg_material_config_parent"
+                          action="stock.action_warehouse_form"/>
+                <menuitem id="menu_gdsg_material_config_stock_location"
+                          name="Stock location"
+                          sequence="30"
+                          parent="menu_gdsg_material_config_parent"
+                          action="stock.action_location_form"/>
+                <menuitem id="menu_gdsg_material_config_product_category"
+                          name="Product Category"
+                          sequence="40"
+                          parent="menu_gdsg_material_config_parent"
+                          action="product.product_category_action_form"/>
+                <menuitem id="menu_gdsg_material_config_uom_category"
+                          name="Uom Category"
+                          sequence="50"
+                          parent="menu_gdsg_material_config_parent"
+                          action="uom.product_uom_categ_form_action"/>
+                <menuitem id="menu_gdsg_material_config_uom_uom"
+                          name="Uom Uom"
+                          sequence="60"
+                          parent="menu_gdsg_material_config_parent"
+                          action="uom.product_uom_form_action"/>
 
     </data>
 </odoo>
