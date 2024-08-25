@@ -6,6 +6,7 @@ import logging
 from num2words import num2words
 from bs4 import BeautifulSoup
 from markupsafe import Markup
+from string import capwords
 
 _logger = logging.getLogger('gdsg_stock_picking_out_xlsx')
 
@@ -28,6 +29,7 @@ class Stock_picking_xlsx(models.AbstractModel):
             footer_text = workbook.add_format({'font_name': 'Times New Roman', 'font_size': 12, 'align': 'left'})
             header_text = workbook.add_format({'font_name': 'Times New Roman', 'font_size': 12, 'align': 'left'})
             signment = workbook.add_format({'font_name': 'Times New Roman', 'bold': True, 'font_size': 12, 'align': 'center'})
+            signment_1 = workbook.add_format({'font_name': 'Times New Roman', 'italic': True, 'font_size': 12, 'align': 'center'})
             line_number_format = workbook.add_format({'font_name': 'Times New Roman', 'num_format': '#,##0', 'border': 1, 'align': 'right'})
             line_number_format_bold = workbook.add_format({'font_name': 'Times New Roman', 'num_format': '#,##0', 'border': 1, 'align': 'right', 'bold': True})
             line_number_format_center = workbook.add_format({'font_name': 'Times New Roman', 'num_format': '#,##0', 'border': 1, 'align': 'center'})
@@ -50,12 +52,12 @@ class Stock_picking_xlsx(models.AbstractModel):
             header_data = self.env['stock.picking'].sudo().browse(int(self_data_id))
             #header
             company_name = self.env.company.name
-            company_vat = self.env.company.vat
+            company_street = self.env.company.street
             sheet.write(0, 0, company_name, bold)
             sheet.merge_range(0, 5, 0, 7, '', merge_format)
             sheet.write(0, 5, 'Mẫu số 02 - VT', header_top)
-            if company_vat:
-                sheet.write(1, 0, 'VAT: %s' % company_vat, bold)
+            if company_street:
+                sheet.write(1, 0, company_street, bold)
             sheet.merge_range(1, 5, 1, 7, '', merge_format)
             sheet.write(1, 5, '(Ban hành theo Thông tư số 200/TT-BTC', header_top)
             sheet.merge_range(2, 5, 2, 7, '', merge_format)
@@ -130,11 +132,10 @@ class Stock_picking_xlsx(models.AbstractModel):
                 sheet.write(line_num, 1, line.product_id.name if line.product_id.name else '', line_text_format)
                 sheet.write(line_num, 2, line.product_id.default_code if line.product_id.default_code else '', line_text_format)
                 sheet.write(line_num, 3, line.product_id.uom_id.name if line.product_id.uom_id.name else '', line_text_center)
-                sheet.write(line_num, 4, line.quantity_done if line.quantity_done else '', line_number_format_center)
-                sheet.write(line_num, 5, line.quantity_done if line.quantity_done else '', line_number_format_center)
-                sheet.write(line_num, 6, line.product_id.list_price if line.product_id.list_price else '', line_number_format)
-                sheet.write(line_num, 7, line.quantity_done * line.product_id.list_price if line.quantity_done and line.product_id.list_price else '', line_number_format)
-                sum_total += line.quantity_done * line.product_id.list_price if line.quantity_done and line.product_id.list_price else 0
+                sheet.write(line_num, 4, line.product_uom_qty if line.product_uom_qty else '', line_number_format_center)
+                sheet.write(line_num, 5, line.product_uom_qty if line.product_uom_qty else '', line_number_format_center)
+                sheet.write(line_num, 6, '', line_number_format)
+                sheet.write(line_num, 7, '', line_number_format)
                 stt += 1
                 line_num += 1
 
@@ -145,15 +146,22 @@ class Stock_picking_xlsx(models.AbstractModel):
             sheet.write(line_num, 4, 'x', line_header)
             sheet.write(line_num, 5, 'x', line_header)
             sheet.write(line_num, 6, 'x', line_header)
-            sheet.write(line_num, 7, sum_total, line_number_format_bold)
+            sheet.write(line_num, 7, 'x', line_number_format_bold)
             #footer
             line_num += 1
             sheet.merge_range(line_num, 0, line_num, 7, '', merge_format)
-            sheet.write(line_num, 0, '- Tổng số tiền (viết bằng chữ): %s' % num2words(sum_total, lang='vi'), footer_text)
+            sheet.write(line_num, 0, '- Tổng số tiền (viết bằng chữ): %s' % (capwords(num2words(sum_total, lang='vi')[0:1]) + num2words(sum_total, lang='vi')[1:]), footer_text)
             line_num += 1
             sheet.merge_range(line_num, 0, line_num, 7, '', merge_format)
             sheet.write(line_num, 0, '- Số chứng từ gốc kèm theo:.......', footer_text)
             line_num += 2
+            sheet.merge_range(line_num, 0, line_num, 7, '', merge_format)
+            sheet.write(line_num, 0,
+                        'TP.Hồ Chí Minh, ngày %s tháng %s năm %s' % (datetime.strftime(datetime.utcnow(), '%d')
+                                                                     , datetime.strftime(datetime.utcnow(), '%m')
+                                                                     , datetime.strftime(datetime.utcnow(), '%Y')),
+                        footer_date)
+            line_num += 1
             sheet.write(line_num, 0, 'Người lập phiếu', signment)
             sheet.merge_range(line_num, 1, line_num, 2, '', merge_format)
             sheet.write(line_num, 1, 'Người nhận hàng', signment)
@@ -162,6 +170,16 @@ class Stock_picking_xlsx(models.AbstractModel):
             sheet.merge_range(line_num, 5, line_num, 6, '', merge_format)
             sheet.write(line_num, 5, 'Kế toán trưởng', signment)
             sheet.write(line_num, 7, 'Giám đốc', signment)
+            line_num += 1
+            sheet.write(line_num, 0, '(Ký, họ tên)', signment_1)
+            sheet.merge_range(line_num, 1, line_num, 2, '', merge_format)
+            sheet.write(line_num, 1, '(Ký, họ tên)', signment_1)
+            sheet.merge_range(line_num, 3, line_num, 4, '', merge_format)
+            sheet.write(line_num, 3, '(Ký, họ tên)', signment_1)
+            sheet.merge_range(line_num, 5, line_num, 6, '', merge_format)
+            sheet.write(line_num, 5, '(Ký, họ tên)', signment_1)
+            sheet.write(line_num, 7, '(Ký, họ tên)', signment_1)
+
         except Exception as e:
             _logger.error('generate_xlsx_report exception: %s' % e)
 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_stock_location_inherit" model="ir.ui.view">
+            <field name="name">gdsg_material.stock.location.form.inherit</field>
+            <field name="model">stock.location</field>
+            <field name="mode">extension</field>
+            <field name="priority" eval="10" />
+            <field name="inherit_id" ref="stock.view_location_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group" position="before">
+                    <label for="report_name"/>
+                    <h2 style="width: 100%;"><field name="report_name"/></h2>
+                    <label for="location_name"/>
+                    <h2 style="width: 100%;"><field name="location_name"/></h2>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
