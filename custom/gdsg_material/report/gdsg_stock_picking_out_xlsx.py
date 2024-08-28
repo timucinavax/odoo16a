@@ -215,7 +215,7 @@ class Stock_picking_xlsx(models.AbstractModel):
             sheet.write(line_num, 8, '(Ký, họ tên)', signment_1)
             line_num += 4
             sheet.merge_range(line_num, 0, line_num, 1, '', footer_text)
-            sheet.write(line_num, 0, header_data.create_uid.name, footer_text)
+            sheet.write(line_num, 0, header_data.write_uid.name, footer_text)
             sheet.merge_range(line_num, 2, line_num, 3, '', merge_format)
             sheet.write(line_num, 2, '', footer_text)
             sheet.merge_range(line_num, 4, line_num, 5, '', merge_format)
