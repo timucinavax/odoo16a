@@ -6,3 +6,4 @@ from . import gdsg_material_purchase_request
 from . import stock_picking
 from . import stock_location
 from . import purchase_order
+from . import res_company

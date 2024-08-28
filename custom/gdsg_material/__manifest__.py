@@ -16,6 +16,7 @@
         'views/stock_picking_inherit_view.xml',
         'views/stock_location_inherit_view.xml',
         'views/res_partner_inherit_view.xml',
+        'views/res_company_inherit_view.xml',
         'views/gdsg_material_bom_view.xml',
         'menus/gdsg_material_menu.xml',
         'report/report.xml',
