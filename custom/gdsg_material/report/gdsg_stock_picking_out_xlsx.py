@@ -36,8 +36,10 @@ class Stock_picking_xlsx(models.AbstractModel):
                 {'font_name': 'Times New Roman', 'italic': True, 'font_size': 13, 'align': 'right'})
             footer_text = workbook.add_format({'font_name': 'Times New Roman', 'font_size': 13, 'align': 'left'})
             header_text = workbook.add_format({'font_name': 'Times New Roman', 'font_size': 13, 'align': 'left'})
-            signment = workbook.add_format(
+            signment_bold = workbook.add_format(
                 {'font_name': 'Times New Roman', 'bold': True, 'font_size': 13, 'align': 'center'})
+            signment = workbook.add_format(
+                {'font_name': 'Times New Roman', 'font_size': 13, 'align': 'center'})
             signment_1 = workbook.add_format(
                 {'font_name': 'Times New Roman', 'italic': True, 'font_size': 13, 'align': 'center'})
             line_number_format = workbook.add_format(
@@ -59,6 +61,7 @@ class Stock_picking_xlsx(models.AbstractModel):
                 {'font_name': 'Times New Roman', 'border': 1, 'font_size': 13, 'text_wrap': True})
             line_text_center = workbook.add_format(
                 {'font_name': 'Times New Roman', 'border': 1, 'align': 'center', 'font_size': 13, 'text_wrap': True})
+
 
             sheet = workbook.add_worksheet('Phiếu Xuất Kho')
             sheet.set_column('A:A', 5)
@@ -195,14 +198,14 @@ class Stock_picking_xlsx(models.AbstractModel):
                         footer_date)
             line_num += 1
             sheet.merge_range(line_num, 0, line_num, 1, '', merge_format)
-            sheet.write(line_num, 0, 'Người lập phiếu', signment)
+            sheet.write(line_num, 0, 'Người lập phiếu', signment_bold)
             sheet.merge_range(line_num, 2, line_num, 3, '', merge_format)
-            sheet.write(line_num, 2, 'Người nhận hàng', signment)
+            sheet.write(line_num, 2, 'Người nhận hàng', signment_bold)
             sheet.merge_range(line_num, 4, line_num, 5, '', merge_format)
-            sheet.write(line_num, 4, 'Thủ kho', signment)
+            sheet.write(line_num, 4, 'Thủ kho', signment_bold)
             sheet.merge_range(line_num, 6, line_num, 7, '', merge_format)
-            sheet.write(line_num, 6, 'Kế toán trưởng', signment)
-            sheet.write(line_num, 8, 'Giám đốc', signment)
+            sheet.write(line_num, 6, 'Kế toán trưởng', signment_bold)
+            sheet.write(line_num, 8, 'Giám đốc', signment_bold)
             line_num += 1
             sheet.merge_range(line_num, 0, line_num, 1, '', signment_1)
             sheet.write(line_num, 0, '(Ký, họ tên)', signment_1)
@@ -214,15 +217,15 @@ class Stock_picking_xlsx(models.AbstractModel):
             sheet.write(line_num, 6, '(Ký, họ tên)', signment_1)
             sheet.write(line_num, 8, '(Ký, họ tên)', signment_1)
             line_num += 4
-            sheet.merge_range(line_num, 0, line_num, 1, '', footer_text)
-            sheet.write(line_num, 0, header_data.write_uid.name, footer_text)
+            sheet.merge_range(line_num, 0, line_num, 1, '', signment)
+            sheet.write(line_num, 0, header_data.write_uid.name, signment)
             sheet.merge_range(line_num, 2, line_num, 3, '', merge_format)
-            sheet.write(line_num, 2, '', footer_text)
+            sheet.write(line_num, 2, '', signment)
             sheet.merge_range(line_num, 4, line_num, 5, '', merge_format)
-            sheet.write(line_num, 4, self.env.company.store_keeper if self.env.company.store_keeper else '', footer_text)
+            sheet.write(line_num, 4, self.env.company.store_keeper if self.env.company.store_keeper else '', signment)
             sheet.merge_range(line_num, 6, line_num, 7, '', merge_format)
-            sheet.write(line_num, 6, self.env.company.chief_accountant if self.env.company.chief_accountant else '', footer_text)
-            sheet.write(line_num, 8, self.env.company.president if self.env.company.president else '', footer_text)
+            sheet.write(line_num, 6, self.env.company.chief_accountant if self.env.company.chief_accountant else '', signment)
+            sheet.write(line_num, 8, self.env.company.president if self.env.company.president else '', signment)
         except Exception as e:
             _logger.error('generate_xlsx_report exception: %s' % e)
 

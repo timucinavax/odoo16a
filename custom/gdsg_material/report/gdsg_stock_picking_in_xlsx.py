@@ -26,7 +26,8 @@ class Stock_picking_xlsx(models.AbstractModel):
             footer_date = workbook.add_format({'font_name': 'Times New Roman', 'italic': True, 'font_size': 13, 'align': 'right'})
             footer_text = workbook.add_format({'font_name': 'Times New Roman', 'font_size': 13, 'align': 'left'})
             header_text = workbook.add_format({'font_name': 'Times New Roman', 'font_size': 13, 'align': 'left'})
-            signment = workbook.add_format({'font_name': 'Times New Roman', 'bold': True, 'font_size': 13, 'align': 'center'})
+            signment = workbook.add_format({'font_name': 'Times New Roman', 'font_size': 13, 'align': 'center'})
+            signment_bold = workbook.add_format({'font_name': 'Times New Roman', 'bold': True, 'font_size': 13, 'align': 'center'})
             signment_1 = workbook.add_format({'font_name': 'Times New Roman', 'italic': True, 'font_size': 13, 'align': 'center'})
             line_number_format = workbook.add_format({'font_name': 'Times New Roman', 'num_format': '#,##0', 'border': 1, 'align': 'right', 'font_size': 13})
             line_number_format_bold = workbook.add_format({'font_name': 'Times New Roman', 'num_format': '#,##0', 'border': 1, 'align': 'right', 'bold': True, 'font_size': 13})
@@ -159,12 +160,12 @@ class Stock_picking_xlsx(models.AbstractModel):
                         footer_date)
             line_num += 1
             sheet.merge_range(line_num, 0, line_num, 1, '', merge_format)
-            sheet.write(line_num, 0, 'Người lập phiếu', signment)
+            sheet.write(line_num, 0, 'Người lập phiếu', signment_bold)
             sheet.merge_range(line_num, 2, line_num, 4, '', merge_format)
-            sheet.write(line_num, 2, 'Người giao hàng', signment)
+            sheet.write(line_num, 2, 'Người giao hàng', signment_bold)
             sheet.merge_range(line_num, 5, line_num, 6, '', merge_format)
-            sheet.write(line_num, 5, 'Thủ kho', signment)
-            sheet.write(line_num, 7, 'Kế toán trưởng', signment)
+            sheet.write(line_num, 5, 'Thủ kho', signment_bold)
+            sheet.write(line_num, 7, 'Kế toán trưởng', signment_bold)
             # sheet.write(line_num, 7, 'Giám đốc', signment)
             line_num += 1
             sheet.merge_range(line_num, 0, line_num, 1, '', merge_format)
@@ -176,12 +177,12 @@ class Stock_picking_xlsx(models.AbstractModel):
             sheet.write(line_num, 7, '(Ký, họ tên)', signment_1)
             line_num += 4
             sheet.merge_range(line_num, 0, line_num, 1, '', merge_format)
-            sheet.write(line_num, 0, header_data.write_uid.name, footer_text)
+            sheet.write(line_num, 0, header_data.write_uid.name, signment)
             sheet.merge_range(line_num, 2, line_num, 4, '', merge_format)
-            sheet.write(line_num, 2, '', footer_text)
+            sheet.write(line_num, 2, '', signment)
             sheet.merge_range(line_num, 5, line_num, 6, '', merge_format)
-            sheet.write(line_num, 5, self.env.company.store_keeper if self.env.company.store_keeper else '', footer_text)
-            sheet.write(line_num, 7, self.env.company.chief_accountant if self.env.company.chief_accountant else '', footer_text)
+            sheet.write(line_num, 5, self.env.company.store_keeper if self.env.company.store_keeper else '', signment)
+            sheet.write(line_num, 7, self.env.company.chief_accountant if self.env.company.chief_accountant else '', signment)
         except Exception as e:
             _logger.error('generate_xlsx_report exception: %s' % e)
 
